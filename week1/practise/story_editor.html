@@ -84,12 +84,11 @@
         let storyName = document.getElementById("name_input").value
         let storyHTML = document.getElementById("story_editor").value
         localStorage.setItem(storyName, storyHTML)
+        if(!listArray.includes(storyName)){
         listArray.push(storyName)
-        console.log(listArray);
         let storedListString = JSON.stringify(listArray)
         localStorage.setItem("listArray", storedListString)
-       
-            let listItem = document.createElement('li');
+        let listItem = document.createElement('li');
             console.log(listArray[listArray.length-1]);
             let name = document.createTextNode(listArray[listArray.length-1]);
             console.log(name);
@@ -97,9 +96,8 @@
             // Selecting the ol element from the root index.html page
             let list = document.getElementById("storyList");
             list.appendChild(listItem);
-        
-            
-        
+        }
+        //console.log(listArray);        
     }
     
     const displayStory = () => {
