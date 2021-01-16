@@ -1,10 +1,5 @@
 
 function startQuiz(){  
-    var elmnt = document.getElementById("welcomeMessage");
-    elmnt.remove(); 
- 
-
-
 
 const quiz = [
     ["What is Superman's real name?","Clark Kent"],
@@ -39,12 +34,8 @@ const quiz = [
     }
     }
     
-    
-
-
-    
         
-            start(quiz);
+    start(quiz);
         
     } 
     
