@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='description' content='adding machine app'>
+        <title>Adding Machine</title>
+        </head>
+        <body>
+        <input type="text" id="value1" />
+        <input type="text" id="value2" />
+        <button onclick="additionMethod()">+</button>
+        <button onclick="subtractionMethod()">-</button>
+        <button onclick="multiplication()">*</button><span id="error"></span>
+        <div id="showInput"></div>
+        <script>
+            // This function is defined with an arrow function
+            const additionMethod = () => {
+                let value1 = document.getElementById("value1").value; 
+                let value2 = document.getElementById("value2").value; 
+                const pattern = /[0-9]/g;
+                let validValue1 = value1.match(pattern);
+                let validValue2 = value2.match(pattern);
+                if(validValue1 && validValue2){
+                let sum = Number(value1) + Number(value2);
+                document.getElementById("showInput").innerHTML = sum; 
+                } else {
+                    document.getElementById("showInput").innerHTML = "Please, input both values as numbers";
+                }         
+            } 
+            // This function is defined with a function declaration 
+            function subtractionMethod() {
+                let value1 = document.getElementById("value1").value; 
+                let value2 = document.getElementById("value2").value; 
+                const pattern = /[0-9]/g;
+                let validValue1 = value1.match(pattern);
+                let validValue2 = value2.match(pattern);
+                if(validValue1 && validValue2){
+                let difference = Number(value1) - Number(value2);
+                document.getElementById("showInput").innerHTML = difference; 
+                } else {
+                    document.getElementById("showInput").innerHTML = "Please, input both values as numbers";
+                }         
+            }  
+            
+            // This function is defined with a function expression
+            const multiplication = function() {
+                let value1 = document.getElementById("value1").value; 
+                let value2 = document.getElementById("value2").value; 
+                const pattern = /[0-9]/g;
+                let validValue1 = value1.match(pattern);
+                let validValue2 = value2.match(pattern);
+                if(validValue1 && validValue2){
+                let product = Number(value1) * Number(value2);
+                document.getElementById("showInput").innerHTML = product; 
+                } else {
+                    document.getElementById("showInput").innerHTML = "Please, input both values as numbers";
+                }         
+            }   
+        </script>
+        </body>
+        </html>
