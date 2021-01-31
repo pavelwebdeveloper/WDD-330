@@ -1,33 +1,28 @@
-/*const board = document.querySelector('div.flex-container');
-board.addEventListener('click',play,false);
-function play(event) {
-    let playerTurn = true;
-    for(let i=0;i<9;i++){
-        const cells = document.getElementsByClassName('cell');
-        if(playerTurn){
-            cell.textContent = "X";
-            playerTurn = false;
-        } else {
-            cell.textContent = "O";
-            playerTurn = true;
-        }
-    }
-}*/
-
 const buttonElement = document.getElementById('bt');
 
 
 //buttonElement.addEventListener('click', restart);
-buttonElement.addEventListener('touchend', restart);
-
+buttonElement.addEventListener('click', restart);
 
 
 const board = document.getElementById('board');
 
-//board.addEventListener('mouseup',play, false);
-board.addEventListener('touchend',play, false);
+board.addEventListener('mouseup',play, false);
+//board.addEventListener('touchend',play, false);
 
-    let counter = 1;
+
+// The first way:
+
+let player = 1;
+
+function play(event){    
+    event.target.textContent == ""?player == 1?event.target.textContent = "X":event.target.textContent = "O":alert("This cell is already filled. Please, choose a different cell");
+    event.target.textContent == "X"?player=2:player=1;    
+};
+
+/* The second way:
+
+let counter = 1;
 function play(event) {
             if(counter>9){
                 alert("The game is over");
@@ -48,7 +43,7 @@ function play(event) {
                     }
                 }
         }    
-    }
+    }*/
 
     function restart(event) {
         const divs = board.children;
