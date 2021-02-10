@@ -10,14 +10,16 @@ class ToDos {
 
         addToDo(newTodo){
             
+            console.log("this is new todo")
             console.log(newTodo);
-            localStorage.setItem(storyName, storyHTML)
-            if(!listArray.includes(storyName)){
-            listArray.push(storyName)
-            let storedListString = JSON.stringify(listArray)
-            localStorage.setItem("listArray", storedListString)
+            localStorage.setItem("todos", newTodo)
+            
+                this.todo.push(newTodo)
+            let todosArrayString = JSON.stringify(this.todo)
+            console.log(todosArrayString);
+            localStorage.setItem("todosArray", todosArrayString)
+        
         }
-}
 }
 
 export default ToDos;
