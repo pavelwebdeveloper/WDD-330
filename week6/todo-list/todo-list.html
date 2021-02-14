@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="styletype" href="styles/style.css">
+        <style>
+            .checked {
+    text-decoration: line-through;
+}
+.displayed {
+    display: none;
+}
+.active{
+    border: 1px solid black;
+}
+            </style>
     </head>
     <body>
+        <main style="border:1px solid black;width:30%;">
         <h1>Todos</h1>
         
+        <div style="margin:100px 0px;">
+            <div id="message"></div>
+        <ul id="todolist" style="list-style-type: none;"></ul>
+        </div>
+        <div id="statistics"><span id="uncompleted"></span><div id="mode" style="inline-block;width:50%;right:0px;"><span>All.</span><span>Active.</span>
+            <span>Completed</span></div></div>
         
-
+        <div style="margin:20px;">
         <input id=todo_value></input>
  <button id=add_todo>+</button>
+        </div></main>
         <script src="script/index.js" type="module"></script>
         </body>
 </html>
