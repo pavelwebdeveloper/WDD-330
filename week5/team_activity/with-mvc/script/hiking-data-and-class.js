@@ -34,6 +34,9 @@ const hikeList = [
         "Take Highway 20 north to Ashton. Turn right into the town and continue through. Follow that road for a few miles then turn left again onto the Cave Falls road. Drive to until you see the sign for Bechler Meadows on the left. Turn there. There is a parking area at the trailhead."
     }
   ];
+
+
+  const imgBasePath = "//byui-cit.github.io/cit261/examples/";
   
   
   // My code starting from here
@@ -49,10 +52,18 @@ const hikeList = [
           this.directions = directions;
           }
   
-          renderHike(imgBasePath) {
+          renderHike(imgBasePath, targetHike = "") {
               const item = document.createElement("li");
-            
-              item.innerHTML = ` <h2>${this.name}</h2>
+              
+
+                    item.addEventListener("click", (event) => {            
+                      this.showHikeDetails(event, item);            
+                          }, true);
+
+              
+
+          if(targetHike != ""){
+            item.innerHTML = `<h2>${this.name}</h2>
               <div class="flex-container">
                     <div class="image"><img src="${imgBasePath}${this.imgSrc}" alt="${this.imgAlt}"></div>
                     <div>
@@ -63,11 +74,65 @@ const hikeList = [
                             <div>
                                 <h3>Difficulty</h3>
                                 <p>${this.difficulty}</p>
-                            </div>                          
-                    </div>
-                    </div>`;
+                            </div>
+                            <div>
+                                <h3>Description</h3>
+                                <p>${this.description}</p>
+                            </div>
+                            <div>
+                                <h3>Direction</h3>
+                                <p>${this.directions}</p>
+                            </div>                    
+                    </div>                    
+                    </div>`;     
+            
+            var button = document.createElement("button");
+            var node = document.createTextNode("Back");
+            button.appendChild(node);
+
+            var element = document.getElementById("backButton");
+            element.appendChild(button);
             
               return item;
+              
+          } else {
+            item.innerHTML = `<h2>${this.name}</h2>
+              <div class="flex-container">
+                    <div class="image"><img src="${imgBasePath}${this.imgSrc}" alt="${this.imgAlt}"></div>
+                    <div>
+                            <div>
+                                <h3>Distance</h3>
+                                <p>${this.distance}</p>
+                            </div>
+                            <div>
+                                <h3>Difficulty</h3>
+                                <p>${this.difficulty}</p>
+                            </div>                       
+                    </div>
+                    </div>`;
+               
+                    var element = document.getElementById("backButton");
+                    element.innerHTML = "";
+            
+              return item;
+          }
+
+              
+            }
+
+           
+            showHikeDetails(event, item){              
+              const targetHike = item.firstChild.textContent;              
+              const list = document.getElementById("hikes");              
+              list.innerHTML = "";              
+              hikeList.forEach(hike => {               
+                    if(hike.name == targetHike){
+                      const currentHike = new Hike(this.name, this.imgSrc, this.imgAlt, this.distance, 
+                        this.difficulty, this.description, this.directions);                      
+              list.appendChild(this.renderHike(imgBasePath, targetHike));
+                }
+                })
+              
             }
     }
  
