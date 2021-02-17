@@ -17,8 +17,9 @@ const imgBasePath = "//byui-cit.github.io/cit261/examples/";
                 });
 
             //document.getElementById("back").addEventListener("click", () => {view.showHikeList();});
+          
             document.getElementById("backButton").addEventListener("click", () => {view.showHikeList();});
-        
+           
             }
         
         };

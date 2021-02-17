@@ -82,16 +82,33 @@ const hikeList = [
                             <div>
                                 <h3>Direction</h3>
                                 <p>${this.directions}</p>
-                            </div>                    
-                    </div>                    
+                            </div> 
+                            <div>
+                            <div id="hikeComments"></div> 
+                            </div>       
                     </div>`;     
             
+            const inputElement = document.getElementById("inputComment");
+            inputElement.innerHTML = "";
+            var input = document.createElement("input");
+            input.setAttribute("id", "comment_text");
+            inputElement.appendChild(input);
+            var button = document.createElement("button");
+            input.setAttribute("id", "add_comment");
+            var node = document.createTextNode("Add comment");
+            button.appendChild(node);
+            inputElement.appendChild(button);
+
+
             var button = document.createElement("button");
             var node = document.createTextNode("Back");
             button.appendChild(node);
 
             var element = document.getElementById("backButton");
+            element.innerHTML = "";
             element.appendChild(button);
+            
+            
             
               return item;
               
