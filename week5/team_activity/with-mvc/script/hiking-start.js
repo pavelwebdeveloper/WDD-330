@@ -24,6 +24,7 @@ const imgBasePath = "//byui-cit.github.io/cit261/examples/";
 
             document.getElementById("inputComment").addEventListener("click", () => {model.saveComment();}, true);
            
+            model.showComments();
             }
         
         };
@@ -65,9 +66,12 @@ const imgBasePath = "//byui-cit.github.io/cit261/examples/";
                 comments.push(newComment);
                 let commentsArrayString = JSON.stringify(comments)
                 console.log(commentsArrayString);
-                localStorage.setItem(type, commentsArrayString)
+                localStorage.setItem(type, commentsArrayString);
+                const hikeName = document.getElementById("hikeName").value;
+                console.log("HIKE NAME:");
+                console.log(document.getElementById("hikeName"));
 
-                this.showComments();                
+                this.showComments(hikeName);                
                     /*this.addToDo(newTodo);
                     this.showToDos(all, active, completed);
                     this.countLeftTasks();*/
@@ -75,20 +79,27 @@ const imgBasePath = "//byui-cit.github.io/cit261/examples/";
         }
     },
 
-    showComments(){
-        const commentsElement = document.getElementById("hikeComments");
+    showComments(hikeName = ""){        
+        const commentsElement = document.getElementById("comments");
         commentsElement.innerHTML = "";
-            this.renderComments(comments);
+            this.renderComments(comments, hikeName);
     },
 
-    renderComments(comments){
-        let nameOfHike = document.getElementById("hikeName").textContent;
-        const hikeName = document.getElementById("hikeName").textContent;
-        const commentsElement = document.getElementById("hikeComments");
+    renderComments(comments, hikeName){
+        
+    
+       
+        const commentsElement = document.getElementById("comments");
+        
         comments.forEach(comment => {
-            if(comment.name = hikeName){
+            //console.log();
+            if(hikeName != ""){
+            if(comment.name == hikeName){
             commentsElement.appendChild(this.renderComment(comment));
             }
+        } else {
+            commentsElement.appendChild(this.renderComment(comment));
+        }
         });
     },
 

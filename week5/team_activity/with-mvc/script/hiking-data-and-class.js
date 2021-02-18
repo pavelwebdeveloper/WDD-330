@@ -84,7 +84,7 @@ const hikeList = [
                                 <p>${this.directions}</p>
                             </div> 
                             <div>
-                            <div id="hikeComments"></div> 
+                            <div id="comments"></div> 
                             </div>       
                     </div>`;     
             
