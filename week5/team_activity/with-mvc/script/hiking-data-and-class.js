@@ -63,7 +63,7 @@ const hikeList = [
               
 
           if(targetHike != ""){
-            item.innerHTML = `<h2>${this.name}</h2>
+            item.innerHTML = `<h2 id="hikeName">${this.name}</h2>
               <div class="flex-container">
                     <div class="image"><img src="${imgBasePath}${this.imgSrc}" alt="${this.imgAlt}"></div>
                     <div>
@@ -94,7 +94,7 @@ const hikeList = [
             input.setAttribute("id", "comment_text");
             inputElement.appendChild(input);
             var button = document.createElement("button");
-            input.setAttribute("id", "add_comment");
+            button.setAttribute("id", "add_comment");
             var node = document.createTextNode("Add comment");
             button.appendChild(node);
             inputElement.appendChild(button);
@@ -130,6 +130,8 @@ const hikeList = [
                
                     var element = document.getElementById("backButton");
                     element.innerHTML = "";
+                    var input = document.getElementById("inputComment");
+                    input.innerHTML = "";
             
               return item;
           }
