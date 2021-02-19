@@ -1,3 +1,4 @@
+import model from './model.js';
 //create an array of hikes. This is model
 
 const hikeList = [
@@ -56,9 +57,9 @@ const hikeList = [
               const item = document.createElement("li");
               
 
-                    item.addEventListener("click", (event) => {            
-                      this.showHikeDetails(event, item);            
-                          }, true);
+              item.addEventListener("click", (event) => {            
+                this.showHikeDetails(event, item);            
+                    }, true);    
 
               
 
@@ -83,9 +84,7 @@ const hikeList = [
                                 <h3>Direction</h3>
                                 <p>${this.directions}</p>
                             </div> 
-                            <div>
-                            <div id="comments"></div> 
-                            </div>       
+                                   
                     </div>`;     
             
             const inputElement = document.getElementById("inputComment");
@@ -108,7 +107,7 @@ const hikeList = [
             element.innerHTML = "";
             element.appendChild(button);
             
-            
+            document.getElementById("add_comment").addEventListener("click", () => {model.saveComment();}, false); 
             
               return item;
               
@@ -149,7 +148,9 @@ const hikeList = [
                       const currentHike = new Hike(this.name, this.imgSrc, this.imgAlt, this.distance, 
                         this.difficulty, this.description, this.directions);                      
               list.appendChild(this.renderHike(imgBasePath, targetHike));
-                }
+                };
+
+                model.showComments(targetHike);
                 })
               
             }
