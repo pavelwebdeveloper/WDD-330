@@ -89,9 +89,11 @@ const hikeList = [
             
             const inputElement = document.getElementById("inputComment");
             inputElement.innerHTML = "";
-            var input = document.createElement("input");
-            input.setAttribute("id", "comment_text");
-            inputElement.appendChild(input);
+            var textarea = document.createElement("textarea");
+            textarea.setAttribute("id", "comment_text");
+            textarea.setAttribute("rows", "10");
+            textarea.setAttribute("cols", "30");
+            inputElement.appendChild(textarea);
             var button = document.createElement("button");
             button.setAttribute("id", "add_comment");
             var node = document.createTextNode("Add comment");
