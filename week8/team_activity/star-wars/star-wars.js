@@ -55,7 +55,9 @@ function representData(data){
             <li><b>birth year</b> ${data[i].birth_year}</li>
             <li><b>gender</b> ${data[i].gender}</li>
             <li><b>homeworld</b> <span id="${data[i].name}-planet">`+getPlanet(data[i].homeworld, data[i].name)+`</span></li>
-            <li><b>films</b> <ul id="${data[i].name}-films">`+renderFilms(data[i].films, data[i].name)+`</ul></li>
+            <li><b>films</b> <ul id="${data[i].name}-films">`+renderItems(data[i].films, data[i].name, "films")+`</ul></li>
+            <li><b>species</b> ${data[i].species}</li>
+            <li><b>vehicles</b> <ul id="${data[i].name}-vehicles">`+renderItems(data[i].vehicles, data[i].name, "vehicles")+`</ul></li>
         </ul>`; 
     }
 
@@ -101,28 +103,36 @@ function getPlanet(planet, name){
         .catch( error => console.log('There was an error:', error))    
 }
 
-function renderFilms(films, name){
-    let filmsList = '';
+function renderItems(items, name, itemType){
+    let itemsList = '';
     let id = 0;
-    films.forEach(element => {
+    items.forEach(element => {
         id++;
-        let identifier = name + id;
+        let identifier = name + id + itemType;
         name += id;
-        filmsList += `<li id="${name}">`+getFilm(element, identifier)+`</li>`;
+        itemsList += `<li id="${name + itemType}">`+getItem(element, identifier, itemType)+`</li>`;
         
     });
-    return filmsList;
+    return itemsList;
 }
 
-function getFilm(film, identifier){    
-    //apiButton.addEventListener('click', () => {
+function getItem(item, identifier, itemType){   
+        //apiButton.addEventListener('click', () => {
+        function getItemByType(data, itemType){
+            if(itemType == "films"){
+                return data.title;
+            } else {
+                return data.name;
+            }
+        }
+
        
-        fetch(film)
+        fetch(item)
         .then( response => {
         //outputDiv.innerHTML = 'Waiting for response...';
         if(response.ok) {
             console.log("*****************************");
-            console.log(film);
+            console.log(item);
         return response;
         }
         throw Error(response.statusText);
@@ -130,7 +140,8 @@ function getFilm(film, identifier){
         .then( response => response.json() )
         //.then( data => document.getElementById(name+"-films").innerText = JSON.stringify(data) )
         //.then( data => document.getElementById(name+"-films").innerHTML = data.title)
-        .then( data => document.getElementById(identifier).innerText = data.title)
+        .then( data => document.getElementById(identifier).innerText = getItemByType(data, itemType))
+        //.then( data => outputDiv.innerText = JSON.stringify(data))
         //.then( data => JSON.stringify(data))
         //.then( data => outputDiv.innerHTML = representData(data.results))
         .catch( error => console.log('There was an error:', error))    
