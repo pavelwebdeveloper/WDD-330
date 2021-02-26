@@ -1,0 +1,19 @@
+h1 {
+    text-align: center;
+    transform: skew(15deg, 4deg);
+}
+
+h2:hover span {
+    color: #484848;
+    transform: rotate(45deg) translateX(100px) scale(3);
+   }
+
+  /* Transforms don’t work on inline elements. But that’s easy enough to fix. We’ll just
+add display: inline-block; to our span*/
+
+   h2 span {
+    font-size: 30px;
+    color: #999999;
+    display: inline-block;
+   }
+   
