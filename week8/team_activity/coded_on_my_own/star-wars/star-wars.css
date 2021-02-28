@@ -27,4 +27,5 @@ h1{
 #output h2{
     text-align: center;
     border-bottom: 1px solid gray;
+    cursor: pointer;
 }
