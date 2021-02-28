@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title> Week 8 Team Exercise</title>   
+    <style>
+      .flexContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+      
+      #output {
+        border: 1px solid black;
+        border-radius: 5px;
+        box-shadow: 5px 5px gray;
+        min-height: 100px;
+        margin: 20px;
+      }
+
+      button {
+        border-radius: 5px;
+        min-width: 75px;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      li {
+        margin: 5px;   
+        list-style: none;  
+        border-bottom: 1px dotted gray;   
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      input {
+        max-width: 40px;
+      }
+
+      input[type='number']+button {
+        max-width: 10px;
+      }
+
+      #pagecount {
+        text-align: center;
+      }
+    </style>
+</head>
+
+<body>
+  <h1>The People of Star Wars</h1>
+  <div id="output">    
+  </div>
+  <ul></ul>
+  <p id='pagecount'><strong>0</strong> pages available</p>
+  <div class="flexContainer">
+    <button id='prev'>Prev</button>
+    <div id='jump' class='flexContainer'>
+      <input type='number' id='page'>
+      <button id='go'>Go</button>
+    </div>
+    <button id='next'>Next</button>
+  </div>
+  
+  <script src="teamexercises.js"></script>
+</body>
+
+</html>
