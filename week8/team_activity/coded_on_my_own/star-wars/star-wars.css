@@ -1,4 +1,4 @@
-/*@media only screen and (max-width: 600px) {*/
+@media only screen and (max-width: 600px) {
 body{
     font-size: 30px;
     margin: 10px;
@@ -7,9 +7,10 @@ body{
 button{
     font-size: 30px;
 }
+}
 
-.hidden {
-    display: none;
+h1{
+    text-align: center;
 }
 
 .flex-container{
@@ -19,8 +20,11 @@ button{
     justify-content: left;
 }
 
+.hidden {
+    display: none;
+}
+
 #output h2{
     text-align: center;
     border-bottom: 1px solid gray;
 }
-/*}*/

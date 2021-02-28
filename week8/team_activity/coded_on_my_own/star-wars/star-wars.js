@@ -31,6 +31,7 @@ function nextDataSet(){
         page = 8;
     }
     getData(page);
+    document.getElementById("number").innerHTML = page;
 }
 
 function previousDataSet(){
@@ -39,12 +40,14 @@ function previousDataSet(){
         page = 1;
     }
     getData(page);
+    document.getElementById("number").innerHTML = page;
 }
 
 function representData(data){
     console.log("COUNT ");
     console.log(data.count);
     document.getElementById("getNumber").max = parseInt(data.count/10);
+    document.getElementById("getNumber").value = page;
     
     let persons = '';
     for(let i=0;i<data.results.length;i++){
@@ -81,9 +84,9 @@ function getData(page){
             throw Error(response.statusText);
             })
             .then( response => response.json() )
-            .then( data => outputDiv.innerText = JSON.stringify(data) )
+            //.then( data => outputDiv.innerText = JSON.stringify(data) )
             //.then( data => outputDiv.innerText = data.results[0].name)
-            //.then( data => outputDiv.innerHTML = representData(data))
+            .then( data => outputDiv.innerHTML = representData(data))
             .catch( error => console.log('There was an error:', error))    
 }
 
@@ -185,8 +188,10 @@ function getNumber(){
 
 function jumpToPage(){
     
-    let page = parseInt(document.getElementById("getNumber").value);
-    getData(page);
+    let pageNumber = parseInt(document.getElementById("getNumber").value);
+    getData(pageNumber);
+    page = pageNumber;
+    document.getElementById("number").innerHTML = pageNumber;
 }
 
 
