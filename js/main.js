@@ -27,6 +27,14 @@ const makeList =()=> {
           {
             label: "Week6 notes",
             url: "week6/index.html"
+          },
+        {
+            label: "Week7 notes",
+            url: "week7/index.html"
+          },
+          {
+            label: "Week8 notes",
+            url: "week8/index.html"
           }
       ]
 
