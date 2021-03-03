@@ -38,6 +38,10 @@ body,html {
   box-shadow: 0 0 1rem #ffc600;
 }
 
+/*.move {
+  transform: translateY(-10px);
+}*/
+
 kbd {
   display: block;
   font-size: 4rem;
