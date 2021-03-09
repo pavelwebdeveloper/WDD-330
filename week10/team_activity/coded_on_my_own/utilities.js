@@ -7,7 +7,7 @@ return fetch(url)
         return response.json();
     }
 } ) // transforms the JSON data into a JavaScript object or throws an error
-.then( data => console.log(Object.entries(data)) )
+//.then( data => console.log(Object.entries(data)) )
 .catch( function(error) {
     console.log('There was an error:', error);
 })
