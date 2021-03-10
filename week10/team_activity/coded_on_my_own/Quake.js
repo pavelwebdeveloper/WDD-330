@@ -18,8 +18,13 @@ export default class Quake {
     + position.lon + '&maxradiuskm=' + radius);
     return this._quakes;
   }
-  getQuakeById(id) {
+  async getQuakeById(id) {
+    
     // filter this._quakes for the record identified by id and return it
-    return this._quakes.features.filter(item => item.id === id)[0];
+    //return this._quakes.then(features => features.filter(item => item.id === id)[0]);
+    const features = await this._quakes.then(result => {return result.features;})
+    console.log("features");
+    console.log(features.filter(item => item.id === id)[0]);
+    return features.filter(item => item.id === id)[0];
   }
 }
