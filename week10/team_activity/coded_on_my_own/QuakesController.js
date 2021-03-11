@@ -2,6 +2,9 @@ import { getLocation } from './utilities.js';
 import Quake from './Quake.js';
 import QuakesView from './QuakesView.js';
 
+
+
+
 // Quake controller
 export default class QuakesController {
   constructor(parent, position = null) {
@@ -15,19 +18,22 @@ export default class QuakesController {
       lat: 0,
       lon: 0
     };
+    //this.radius = 2000;
     // this is how our controller will know about the model and view...we add them right into 
     //the class as members.
     this.quakes = new Quake();
     this.quakesView = new QuakesView();
   }
-  async init() {
+  async init(radius) {
     // use this as a place to grab the element identified by this.parent, do the initial call 
     //of this.initPos(), and display some quakes by calling this.getQuakesByRadius()
     this.parentElement = document.querySelector(this.parent);
     await this.initPos();
-    this.getQuakesByRadius(100);
+    this.getQuakesByRadius(radius);
   }
   async initPos() {
+
+    
     // if a position has not been set
     if (this.position.lat === 0) {
         
@@ -59,9 +65,11 @@ export default class QuakesController {
       }
     }
   }
-  async getQuakesByRadius(radius = 100) {
+  async getQuakesByRadius(radius = 800) {
       console.log("within getQuakesByRadius");
       console.log(this.position);
+      console.log(radius);
+      console.log(this.radius);
     // this method provides the glue between the model and view. Notice it first goes out and
     // requests the appropriate data from the model, then it passes it to the view to be 
     //rendered.
@@ -70,7 +78,7 @@ export default class QuakesController {
     // get the list of quakes in the specified radius of the location
     const quakeList = await this.quakes.getEarthQuakesByRadius(
       this.position,
-      2000
+      radius
     );
     // render the list to html
     this.quakesView.renderQuakeList(quakeList, this.parentElement);
@@ -97,6 +105,10 @@ export default class QuakesController {
     this.quakesView.renderQuake(properties, element);
    
   }
+  
+
 }
+    
+
 
 // touchend

@@ -1,4 +1,6 @@
 export function getJSON(url){
+    console.log("url inside getJSON");
+    console.log(url);
 return fetch(url)
 .then( function(response) {
     if (!response.ok) {

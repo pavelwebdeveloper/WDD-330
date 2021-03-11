@@ -5,7 +5,43 @@ import QuakesController from './QuakesController.js'
 
 const quakesController = new QuakesController('#quakeList');  
     quakesController.init();
-    console.log(quakesController.getQuakesByRadius())
+    console.log(quakesController.getQuakesByRadius());
+
+    document.getElementById('radius').addEventListener('keyup', getRadiusFromUser, false);  
+    document.getElementById('starttime').addEventListener('change', getDateFromUser, false); 
+    document.getElementById('endtime').addEventListener('change', getDateFromUser, false);   
+
+    
+    function getRadiusFromUser(){
+        //let starttime = document.getElementById("starttime").value;
+        //let endtime = document.getElementById("endtime").value;
+        let radius = parseInt(document.getElementById("radius").value);
+        console.log("FROM RADIUS");
+        //console.log(starttime);
+        //console.log(endtime);
+        console.log(radius);
+
+        quakesController.init(radius);
+        //quakesController.quakes.starttime = starttime;
+        //quakesController.quakes.endtime = endtime;
+          
+      }
+
+      function getDateFromUser(){
+        let starttime = document.getElementById("starttime").value;
+        let endtime = document.getElementById("endtime").value;
+        
+        console.log("FROM DATE");
+        console.log(starttime);
+        console.log(endtime);
+        
+
+        quakesController.init();
+        quakesController.quakes.starttime = starttime;
+        //quakesController.quakes.starttime = starttime;
+        quakesController.quakes.endtime = endtime;
+          
+      }
     
 
 
