@@ -22,7 +22,7 @@ export default class QuakesView {
       const quakeProperties = Object.entries(quake.properties);
       
     
-      var list = document.createElement("ul");
+      let list = document.createElement("ul");
       for (let property of quakeProperties) {
         var li = document.createElement("li");
         var node = document.createTextNode(property);

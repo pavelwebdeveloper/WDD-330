@@ -30,6 +30,7 @@ export default class QuakesController {
     this.parentElement = document.querySelector(this.parent);
     await this.initPos();
     this.getQuakesByRadius(radius);
+    
   }
   async initPos() {
 
@@ -65,7 +66,7 @@ export default class QuakesController {
       }
     }
   }
-  async getQuakesByRadius(radius = 800) {
+  async getQuakesByRadius(radius = 0) {
       console.log("within getQuakesByRadius");
       console.log(this.position);
       console.log(radius);
@@ -101,12 +102,17 @@ export default class QuakesController {
     
     
     console.log("element");
-    console.log(element);
+    console.log(this.quakesView);
+    
     this.quakesView.renderQuake(properties, element);
+    let elementStorage = element;
+      document.querySelector('[id="quakeList"]').innerHTML = ''; 
+      document.querySelector('[id="quakeList"]').appendChild(elementStorage);
+      document.querySelector('[id="backToListButton"]').classList.toggle('visible'); 
    
   }
   
-
+  
 }
     
 

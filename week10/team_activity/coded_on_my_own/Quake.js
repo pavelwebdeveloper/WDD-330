@@ -18,7 +18,7 @@ export default class Quake {
       this.baseUrl = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2019-01-01&endtime=2019-02-02';
     }*/
   }
-  async getEarthQuakesByRadius(position, radius = 100) {
+  async getEarthQuakesByRadius(position, radius) {
     // use the getJSON function and the position provided to build out the correct URL 
     //to get the data we need.  Store it into this._quakes, then return it
     //console.log("within getEarthQuakesByRadius");
