@@ -89,9 +89,21 @@ export default class QuakesController {
         console.log(e.target.firstChild.nextSibling);
         
       this.getQuakeDetails(e.target.dataset.id);
-        
-    });
+      
+    });   
+    
+
+    document.getElementById("backToListButton").addEventListener('click',  e => {      
+    e.target.classList.add("invisible");  
+    document.querySelector('[id="quakeList"]').innerHTML = ''; 
+    let radius = parseInt(document.getElementById("radius").value);
+    this.init(radius);
+  }, false);  
+
   }
+
+  
+
   async getQuakeDetails(quakeId) {
     // get the details for the quakeId provided from the model, then send them to the view 
     //to be displayed 
@@ -108,9 +120,12 @@ export default class QuakesController {
     let elementStorage = element;
       document.querySelector('[id="quakeList"]').innerHTML = ''; 
       document.querySelector('[id="quakeList"]').appendChild(elementStorage);
-      document.querySelector('[id="backToListButton"]').classList.toggle('visible'); 
+      console.log("THE CLASSES:    ");
+      console.log(document.getElementById("backToListButton"));
+      document.getElementById("backToListButton").classList.remove("invisible"); 
    
   }
+  
   
   
 }

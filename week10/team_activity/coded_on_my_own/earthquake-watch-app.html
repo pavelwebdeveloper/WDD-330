@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
         <title>Local Quakes</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="styles.css">
     </head>
 
     <body>
@@ -17,7 +18,7 @@
             <label for="radius">Radius:</label>
                 <input type="number" id="radius" name="radius" min="1" value="0">
                 <!--<input id="submit" type="submit" value="Submit">-->
-            <button id="backToListButton"></button>
+            <button id="backToListButton" class="invisible">BackToList</button>
             <ul id="quakeList" ></ul>
         </main>
         <script src="index.js" type="module">
