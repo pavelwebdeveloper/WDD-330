@@ -14,6 +14,7 @@ const quakesController = new QuakesController('#quakeList');
     document.getElementById('endtime').addEventListener('change', getRadiusFromUser, false); 
     
     function getRadiusFromUser(){
+      document.getElementById("backToListButton").classList.add("invisible");  
         //let starttime = document.getElementById("starttime").value;
         //let endtime = document.getElementById("endtime").value;
         let radius = parseInt(document.getElementById("radius").value);

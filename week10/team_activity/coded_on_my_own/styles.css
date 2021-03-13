@@ -13,13 +13,15 @@ ul#quakeList li:hover{
     background-color: yellowgreen;
 }
 
-ul#quakeList li:hover ul{
+ul#quakeList li:hover li{
     background-color: white;
     cursor: auto;
 }
 
-ul#quakeList li:hover ul li{
-    cursor: auto;
+
+
+div#button{
+    margin: 10px 10px;
 }
 
 button {

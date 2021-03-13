@@ -16,16 +16,16 @@ export default class QuakesView {
       .join('');
     }
     renderQuake(quake, element) {
-      const quakeProperties = Object.entries(quake.properties);      
-    
-      let list = document.createElement("ul");
-      for (let property of quakeProperties) {
-        var li = document.createElement("li");
-        var node = document.createTextNode(property);
-        li.appendChild(node);
-        list.appendChild(li);
-      }
-      element.appendChild(list);
+      const quakeProperties = Object.entries(quake.properties); 
+      element.innerHTML = quakeProperties
+      .map(quakeProperty => {
+        return `<li>
+  ${quakeProperty}
+  </li>`;
+      })
+      .join('');     
+     
+      
     } 
       // for the provided quake make a list of each of the properties associated with it. 
       //Then append the list to the provided element. Notice the first line of this method. 

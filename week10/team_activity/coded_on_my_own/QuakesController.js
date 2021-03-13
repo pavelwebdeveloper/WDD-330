@@ -95,6 +95,7 @@ export default class QuakesController {
 
     document.getElementById("backToListButton").addEventListener('click',  e => {      
     e.target.classList.add("invisible");  
+    
     document.querySelector('[id="quakeList"]').innerHTML = ''; 
     let radius = parseInt(document.getElementById("radius").value);
     this.init(radius);
