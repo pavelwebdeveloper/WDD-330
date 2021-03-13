@@ -1,8 +1,6 @@
 // Quake View handler
 export default class QuakesView {
     renderQuakeList(quakeList, listElement) {
-        console.log("quakeList");
-        console.log(quakeList);
                
       //build a list of the quakes...include the title and time of each quake then append
       // the list to listElement. You should also add the id of the quake record as
@@ -18,9 +16,7 @@ export default class QuakesView {
       .join('');
     }
     renderQuake(quake, element) {
-        console.log("within renderQuake");
-      const quakeProperties = Object.entries(quake.properties);
-      
+      const quakeProperties = Object.entries(quake.properties);      
     
       let list = document.createElement("ul");
       for (let property of quakeProperties) {

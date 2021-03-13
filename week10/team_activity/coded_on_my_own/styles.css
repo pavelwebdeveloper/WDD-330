@@ -1,3 +1,31 @@
 .invisible{
     display: none;
 }
+
+ul#quakeList li{
+    list-style-type: none;
+    border-bottom: 1px solid grey;
+    margin: 5px;
+    padding: 5px;
+}
+ul#quakeList li:hover{
+    cursor: pointer;
+    background-color: yellowgreen;
+}
+
+ul#quakeList li:hover ul{
+    background-color: white;
+    cursor: auto;
+}
+
+ul#quakeList li:hover ul li{
+    cursor: auto;
+}
+
+button {
+    margin: 10px;
+}
+
+h1{
+    text-align: center;
+}
