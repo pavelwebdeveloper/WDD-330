@@ -32,9 +32,10 @@ async function makeRequest(url, method = 'GET', body = null, token = null) {
   
   const response = await fetch(baseURL + url, options);
   // in this case we are processing the response as JSON before we check the status. The API we are using will send back more meaningful error messages than the default messages in the response, but we have to convert it before we can get to them.
-  console.log("response: ");
-      console.log(response);
+  
   const data = await response.json();
+  console.log("response: ");
+      console.log(data);
 
   if (!response.ok) {
     // server will send a 500 server error if the token expires...or a 401 if we are not authorized, ie bad username/password combination, and a 404 if the URL we requested does not exist. All of these would cause response.ok to be false

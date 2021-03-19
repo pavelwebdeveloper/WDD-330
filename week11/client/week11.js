@@ -23,6 +23,8 @@ import Auth from './auth.js'
         event.preventDefault();
         
             const auth = new Auth();
-            auth.login();
+            auth.login(auth.getPosts());
     })
+
+    
         

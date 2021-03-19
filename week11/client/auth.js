@@ -35,7 +35,10 @@ export default class Auth {
       
       // let's get the user details as well and store them locally in the class
       // you can pass a query to the API by appending it on the end of the url like this: 'users?email=' + email
-      this.user = await this.getCurrentUser(username.value);
+      this.user = await this.getCurrentUser(username.value)
+      console.log("this.user: ");
+      console.log(this.user);
+      
       
       // hide the login form.
       document.getElementById('login').classList.add('hidden');
@@ -44,12 +47,24 @@ export default class Auth {
       
       // since we have a token let's go grab some data from the API by executing the callback if one was passed in
       if(callback) {
-        callback();
+        //callback();
+        console.log("INSIDE IF CALLBACK BLOCK !!!!");
+        await this.getPosts();
+        document.getElementById('postInput').classList.remove('hidePostInput');
       }
+
+      document.getElementById("addPostButton").addEventListener('click',(event) => {
+        event.preventDefault();
+        
+        
+            this.addPost();
+    })
     } catch (error) {
       // if there were any errors display them
       console.log(error);
     }
+
+
   }
   // uses the email of the currently logged in user to pull up the full user details for that user from the database
   async getCurrentUser(email) {
@@ -61,9 +76,56 @@ export default class Auth {
         console.log('users?email=' + email);
         console.log(this.jwtToken);
       // 3. add the code here to make a request for the user identified by email...don't forget to send the token!
-      await makeRequest('users?email=' + email, 'GET', {
-        email: email
-        }, this.jwtToken)
+      return await makeRequest('users?email=' + email, 'GET', '', this.jwtToken)
+      
+    } catch (error) {
+      // if there were any errors display them
+      console.log(error);
+    }
+  }
+
+  async getPosts() {
+    try {
+        console.log("DATA for get POSTS");
+        console.log(this.jwtToken);
+      // 3. add the code here to make a request for the user identified by email...don't forget to send the token!
+      const posts = await makeRequest('posts', 'GET', '', this.jwtToken)
+      console.log("posts: ");
+      console.log(posts);
+      const list = document.getElementById('posts');
+      posts.forEach(post => {
+        const item = document.createElement("li");
+        item.innerHTML = `<h2 id="${post.id}">${post.title}</h2>
+              <div class="flex-container">                    
+                    <div>
+                            <div>
+                                <h3>Content</h3>
+                                <p>${post.content}</p>
+                            </div>                          
+                    </div>`; 
+                    list.appendChild(item);  
+      }) 
+      // hide the login form.
+      
+      
+    } catch (error) {
+      // if there were any errors display them
+      console.log(error);
+    }
+  }
+
+  async addPost() {
+    const postTitle = document.getElementById('postTitle').value;
+    const postContents = document.getElementById('postContents').value;
+    try {
+        console.log("DATA for get POSTS ^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+        console.log(this.jwtToken);
+      // 3. add the code here to make a request for the user identified by email...don't forget to send the token!
+      await makeRequest('posts', 'POST', {title: postTitle,
+        content: postContents}, this.jwtToken);
+        
+      
+        this.getPosts();
       
     } catch (error) {
       // if there were any errors display them
