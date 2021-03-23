@@ -8,6 +8,8 @@ export default class Auth {
     this.user = {};
   }
 
+  
+
   async login(callback) {
     // replace the ids below with whatever you used in your form.
     const password = document.getElementById('password');
@@ -44,6 +46,7 @@ export default class Auth {
       document.getElementById('login').classList.add('hidden');
       // clear the password
       password.value = '';
+
       
       // since we have a token let's go grab some data from the API by executing the callback if one was passed in
       if(callback) {
@@ -53,16 +56,15 @@ export default class Auth {
         document.getElementById('postInput').classList.remove('hidePostInput');
       }
 
-      document.getElementById("addPostButton").addEventListener('click',(event) => {
-        event.preventDefault();
-        
-        
-            this.addPost();
-    })
+      
+      
     } catch (error) {
       // if there were any errors display them
       console.log(error);
+      const errors = new Errors();
     }
+
+    
 
 
   }
@@ -77,6 +79,8 @@ export default class Auth {
         console.log(this.jwtToken);
       // 3. add the code here to make a request for the user identified by email...don't forget to send the token!
       return await makeRequest('users?email=' + email, 'GET', '', this.jwtToken)
+
+      
       
     } catch (error) {
       // if there were any errors display them
@@ -93,6 +97,7 @@ export default class Auth {
       console.log("posts: ");
       console.log(posts);
       const list = document.getElementById('posts');
+      list.innerHTML = '';
       posts.forEach(post => {
         const item = document.createElement("li");
         item.innerHTML = `<h2 id="${post.id}">${post.title}</h2>
@@ -105,7 +110,7 @@ export default class Auth {
                     </div>`; 
                     list.appendChild(item);  
       }) 
-      // hide the login form.
+      
       
       
     } catch (error) {
@@ -123,9 +128,21 @@ export default class Auth {
       // 3. add the code here to make a request for the user identified by email...don't forget to send the token!
       await makeRequest('posts', 'POST', {title: postTitle,
         content: postContents}, this.jwtToken);
+        const list = document.getElementById('posts');
         
+          const item = document.createElement("li");
+          item.innerHTML = `<h2 id="">${postTitle}</h2>
+                <div class="flex-container">                    
+                      <div>
+                              <div>
+                                  <h3>Content</h3>
+                                  <p>${postContents}</p>
+                              </div>                          
+                      </div>`; 
+                      list.appendChild(item);  
       
-        this.getPosts();
+        //this.getPosts();
+        
       
     } catch (error) {
       // if there were any errors display them

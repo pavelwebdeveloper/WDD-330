@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="week11.js" type="module"></script>
+        
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <div id="errors" class="errors hidden"></div>
         <form id="login">
             <label>email (username)</label>
             <input type="text" id="username"/>
             <label>password</label>
-            <input type="text" id="password"/>
-            <button id="submitButton" type="submit">Submit</button>
+            <input type="password" id="password"/>
+            <button id="submitButton">Submit</button>
             <div id="response"></div>
-            </form>
-            <ul id="posts" class="postsStyles">
-                <!-- your hike list should be build here. -->
-              </ul>
+        </form>
+            
               <div id="postInput" class="hidePostInput">
                   <h3>You can add a post here</h3>
                   <input type="text" id="postTitle"><br>
@@ -24,7 +23,8 @@
               </div>
         
 
-        
-        
+              <ul id="posts" class="postsStyles">
+            </ul>
+              <script src="week11.js" type="module"></script>
         </body>
 </html>

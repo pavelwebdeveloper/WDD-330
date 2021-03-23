@@ -1,6 +1,9 @@
 import makeRequest from './authHelpers.js'
 import Auth from './auth.js'
 
+
+const auth = new Auth();
+
 /*makeRequest('login', 'POST', {
     password: 'user1',
     email: 'user1@email.com'
@@ -19,12 +22,22 @@ import Auth from './auth.js'
         auth.login();
     }*/
 
-    document.getElementById("login").addEventListener('click',(event) => {
+    
+    
+    document.getElementById("submitButton").addEventListener('click',(event) => {
         event.preventDefault();
         
-            const auth = new Auth();
+        
             auth.login(auth.getPosts());
-    })
+    }, false)
 
+    document.getElementById("addPostButton").addEventListener('click',(event) => {
+        event.preventDefault();
+        event.stopPropagation(); 
+        
+        
+            auth.addPost();
+            
+    }, false)
     
         
