@@ -1,30 +1,26 @@
-import { getJSON } from './utilities.js';
-// Quake Model
+import { getData } from './utilities.js';
+// Movie Model
 export default class Movie {
   constructor() {
     
-    // this is where we will store the last batch of retrieved quakes in the model.  
-    //I don't always do this...in this case the api doesn't have an endpoint to request 
-    //one quake.
+   
     this._movies = [];
     
 
-    this.baseUrl = 'http://www.omdbapi.com/?i=tt3896198&apikey=6c3a52ae';
+    this.baseUrl = 'http://www.omdbapi.com/?apikey=6c3a52ae&s=Alice in Wonderland';
+    //this.baseUrl = 'http://www.omdbapi.com/?apikey=6c3a52ae&s=Winnie the Pooh';
     
   }
-  async getEarthQuakesByRadius(position, radius) {
-    // use the getJSON function and the position provided to build out the correct URL 
-    //to get the data we need.  Store it into this._quakes, then return it
-    //console.log("within getEarthQuakesByRadius");
+  async getMovies() {
+   
      
-      this._quakes = getJSON(this.baseUrl);
+      await getData(this.baseUrl).then(data => {
+        console.log(data.Search);
+        this._movies = data.Search;
+      });
 
-    return this._quakes;
+    return this._movies;
   }
 
-  async getQuakeById(id) {    
-    // filter this._quakes for the record identified by id and return it
-    const features = await this._quakes.then(result => {return result.features;})
-    return features.filter(item => item.id === id)[0];
-  }
+  
 }
