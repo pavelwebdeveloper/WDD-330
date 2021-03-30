@@ -2,8 +2,10 @@ import MoviesController from './MoviesController.js'
 
 
 
-const moviesController = new MoviesController('#randomMovieList');  
+const moviesController = new MoviesController('#movieList');  
     moviesController.init();
-    console.log(moviesController.init());
+    
+
+    
 
     

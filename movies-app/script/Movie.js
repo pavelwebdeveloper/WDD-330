@@ -12,13 +12,22 @@ export default class Movie {
     this.urlToGetMovieDetails = 'http://www.omdbapi.com/?i=tt3896198&apikey=6c3a52ae';
     
   }
-  async getMovies() {
+  async getMovies(nameForSearch = '') {
+
+    //console.log("LENGTH");
+    //console.log(nameForSearch.length);
    
-     
+     if(nameForSearch.length == 0){
       await getData(this.baseUrl + 'apikey=6c3a52ae&s=Alice in Wonderland').then(data => {
-        console.log(data.Search);
+        //console.log(data.Search);
         this._movies = data.Search;
       });
+    } else {
+      await getData(this.baseUrl + 'apikey=6c3a52ae&s=' + nameForSearch).then(data => {
+        //console.log(data.Search);
+        this._movies = data.Search;
+      });
+    }
 
     return this._movies;
   }

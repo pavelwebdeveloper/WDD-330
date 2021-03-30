@@ -2,13 +2,18 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="styles.css">
 <title>Movie library</title>
 
 </head>
 <body>
-    <ul id='randomMovieList'>
+    <label for="searchByName">Search by name:</label>
+                <input type="text" id="searchByName" name="searchByName">
+    <div id="button"><button id="backToListButton" class="invisible">Back to list</button></div>
+    <ul id='movieList'>
         Ajax response will appear here
-    </ul>
+    </ul>   
 <script src='script/main.js'  type="module"></script>
 </body>
 </html>
