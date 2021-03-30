@@ -1,6 +1,5 @@
 export function getData(url){
-    console.log("url inside getMovies");
-    console.log(url);
+    
 return fetch(url)
 .then( function(response) {
     if (!response.ok) {

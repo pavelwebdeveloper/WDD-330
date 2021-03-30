@@ -1,20 +1,19 @@
-// Quake View handler
-export default class MoviesView {
-    renderMoviesList(moviesList, listElement) {
+export default class CommentsView {
+    renderCommentsList(commentsList, listElement) {
       
-      listElement.innerHTML = moviesList
-      .map(movie => {
+      listElement.innerHTML = commentsList
+      .map(comment => {
         
-        return `<li data-id="${movie.imdbID}" class="quake">
+        /*return `<li data-id="${movie.imdbID}" class="quake">
   <h3>${movie.Title}</h3>, <img src="${movie.Poster}"></img>
   </li>`;
       })
-      .join('');
-    }
+      .join('');*/
+    })
 
 
     
-    renderMovie(movie, element) {
+    /*renderMovie(movie, element) {
 
 element.innerHTML = `<ul><li><b>Title</b> ${movie.Title}</li>
 <li><b>Actors</b> ${movie.Actors}</li>
@@ -35,19 +34,10 @@ element.innerHTML = `<ul><li><b>Title</b> ${movie.Title}</li>
 <li><b>Writer</b> ${movie.Writer}</li>
 </ul>`;
 
-const inputElement = document.getElementById("inputComment");
-            inputElement.innerHTML = "";
-            var input = document.createElement("input");
-            input.setAttribute("id", "comment_text");
-            inputElement.appendChild(input);
-            var button = document.createElement("button");
-            button.setAttribute("id", "add_comment");
-            var node = document.createTextNode("Add comment");
-            button.appendChild(node);
-            inputElement.appendChild(button);
-
       
-  }
+  }*/
 
   
+}
+
 }
