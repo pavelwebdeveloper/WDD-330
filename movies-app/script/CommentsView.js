@@ -1,16 +1,25 @@
 export default class CommentsView {
-    renderCommentsList(commentsList, listElement) {
+    renderCommentsList(commentList, listElement, movieId) {
+        //let movieId = document.getElementById("detailsList").parentNode.getAttribute('data-id');
+        /*let movieId = document.getElementById("detailsList");*/
+        console.log("listElement !!!!!!!!!!!!!!!!!!!: ");
+        console.log(commentList);
+        console.log("movieId: ");
+        console.log(movieId);
       
-      listElement.innerHTML = commentsList
+      listElement.innerHTML = commentList
       .map(comment => {
-        
-        /*return `<li data-id="${movie.imdbID}" class="quake">
-  <h3>${movie.Title}</h3>, <img src="${movie.Poster}"></img>
+          console.log("inside map");
+        console.log(comment.movieId);
+        if(movieId == comment.movieId){
+        return `<li class="comment">
+  <h3>${comment.date}</h3>, <p>${comment.content}</p>
   </li>`;
+        }
       })
-      .join('');*/
-    })
-
+      .join('');
+    
+   
 
     
     /*renderMovie(movie, element) {

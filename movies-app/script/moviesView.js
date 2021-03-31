@@ -16,7 +16,7 @@ export default class MoviesView {
     
     renderMovie(movie, element) {
 
-element.innerHTML = `<ul><li><b>Title</b> ${movie.Title}</li>
+element.innerHTML = `<ul id="detailsList"><li><b>Title</b> ${movie.Title}</li>
 <li><b>Actors</b> ${movie.Actors}</li>
 <li><b>Awards</b> ${movie.Awards}</li>
 <li><b>BoxOffice</b> ${movie.BoxOffice}</li>
@@ -35,6 +35,8 @@ element.innerHTML = `<ul><li><b>Title</b> ${movie.Title}</li>
 <li><b>Writer</b> ${movie.Writer}</li>
 </ul>`;
 
+
+
 const inputElement = document.getElementById("inputComment");
             inputElement.innerHTML = "";
             var input = document.createElement("input");
@@ -46,8 +48,11 @@ const inputElement = document.getElementById("inputComment");
             button.appendChild(node);
             inputElement.appendChild(button);
 
-      
+    
+            //return movieId;
   }
+
+  
 
   
 }

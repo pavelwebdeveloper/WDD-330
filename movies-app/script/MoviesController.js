@@ -41,17 +41,25 @@ export default class QuakesController {
 
     
 
-    this.commentsView.renderCommentsList(commentList, this.commentListParentElement); 
+    
     this.parentElement.addEventListener('click', e => {
         
       this.getMovieDetails(e.target.parentElement.getAttribute('data-id'));
+      console.log("commentList inside MovieController: ");
+      console.log(commentList);
+      
+     
+      
   });
 
   
 
 
   document.getElementById("backToListButton").addEventListener('click',  e => {      
-    e.target.classList.add("invisible");  
+    e.target.classList.add("invisible"); 
+    document.getElementById("message").classList.add("invisible");
+      document.getElementById("inputComment").classList.add("invisible");
+      document.getElementById("commentList").classList.add("invisible"); 
     
     document.querySelector(this.parent).innerHTML = ''; 
     document.getElementById("inputComment").innerHTML = '';
@@ -68,6 +76,9 @@ export default class QuakesController {
 
     this.init(nameForSearch);
   }, false);
+
+  
+  
   
   }
 
@@ -75,6 +86,7 @@ export default class QuakesController {
     // get the details for the quakeId provided from the model, then send them to the view 
     //to be displayed 
     let element = document.querySelector(`[data-id="${movieId}"]`); 
+    
     
     
     
@@ -86,13 +98,28 @@ export default class QuakesController {
     
     
     this.moviesView.renderMovie(movieDetails, element);
+    let movieNumber = document.getElementById("detailsList").parentNode.getAttribute('data-id');
+console.log("inside renderMovie");
+console.log(movieNumber);
     //let elementStorage = element;
       document.querySelector(this.parent).innerHTML = ''; 
       document.querySelector(this.parent).appendChild(element);
       
       document.getElementById("backToListButton").classList.remove("invisible");
+      document.getElementById("message").classList.remove("invisible");
+      document.getElementById("inputComment").classList.remove("invisible");
+      document.getElementById("commentList").classList.remove("invisible");
+      const commentList = this.comments.getCommentList();
 
-      this.comments.saveComment();
+      this.commentsView.renderCommentsList(commentList, this.commentListParentElement, movieNumber); 
+
+      document.getElementById('add_comment').addEventListener('click', e => {    
+        this.comments.saveComment();  
+        const commentList = this.comments.getCommentList();
+        console.log("commentList inside MovieController inside renderMovie: ");
+      console.log(commentList);
+        this.commentsView.renderCommentsList(commentList, this.commentListParentElement, movieNumber); 
+      }, false);
    
   }
   

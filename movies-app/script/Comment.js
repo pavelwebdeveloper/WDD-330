@@ -40,13 +40,11 @@ export default class Comment {
             let name = movieName;           
         let comment = commentText;
         let newComment = new Comment(movieID, name, comment);
+        let comments = this.getCommentList();
         comments.push(newComment);
         let commentsArrayString = JSON.stringify(comments)
         console.log(commentsArrayString);
-        localStorage.setItem(type, commentsArrayString);
-        
-
-                       
+        localStorage.setItem(type, commentsArrayString);                
            
         
 }
