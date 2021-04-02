@@ -1,5 +1,5 @@
-import Movie from './Movie.js';
-import MoviesView from './MoviesView.js';
+import Recipe from './Recipe.js';
+import RecipesView from './RecipesView.js';
 import Comment from './Comment.js';
 import CommentsView from './CommentsView.js';
 
@@ -7,9 +7,9 @@ import CommentsView from './CommentsView.js';
 
 
 // Movie controller
-export default class QuakesController {
-  constructor(movieListParent, commentListParent) {
-    this.parent = movieListParent;
+export default class RecipesController {
+  constructor(recipeListParent, commentListParent) {
+    this.parent = recipeListParent;
     this.commentListParent = commentListParent;
     
     
@@ -17,8 +17,8 @@ export default class QuakesController {
     this.commentListParentElement = null;
    
     
-    this.movies = new Movie();
-    this.moviesView = new MoviesView();
+    this.recipes = new Recipe();
+    this.recipesView = new RecipesView();
     this.comments = new Comment();
     this.commentsView = new CommentsView();
   }
@@ -28,14 +28,16 @@ export default class QuakesController {
     this.commentListParentElement = document.querySelector(this.commentListParent);
     
     
-    const movieList = await this.movies.getMovies(nameForSearch);
+    const recipeList = await this.recipes.getRecipes(nameForSearch);
     //console.log(await this.movies.getMovies());
+
+    console.log(recipeList);
     
     this.parentElement.innerHTML = 'Loading...'; 
 
     
     
-    this.moviesView.renderMoviesList(movieList, this.parentElement); 
+    this.recipesView.renderRecipesList(recipeList, this.parentElement); 
     
     const commentList = this.comments.getCommentList();
 
@@ -44,9 +46,9 @@ export default class QuakesController {
     
     this.parentElement.addEventListener('click', e => {
         
-      this.getMovieDetails(e.target.parentElement.getAttribute('data-id'));
-      console.log("commentList inside MovieController: ");
-      console.log(commentList);
+      this.getRecipeDetails(e.target.parentElement.getAttribute('data-id'));
+      console.log("id inside RecipeController: ");
+      console.log(e.target.parentElement.getAttribute('data-id'));
       
      
       
@@ -69,8 +71,9 @@ export default class QuakesController {
   }, false); 
 
   //document.getElementById('searchByName').addEventListener('keyup', getNameForSearchFromUser, false);
-
+  //location.reload();
   document.getElementById('searchByName').addEventListener('keyup', e => {
+      
     let nameForSearch = document.getElementById("searchByName").value;
     
 
@@ -82,25 +85,30 @@ export default class QuakesController {
   
   }
 
-  async getMovieDetails(movieId) {
+  async getRecipeDetails(recipeUri) {
     // get the details for the quakeId provided from the model, then send them to the view 
     //to be displayed 
-    let element = document.querySelector(`[data-id="${movieId}"]`); 
+    let element = document.querySelector(`[data-id="${recipeUri}"]`); 
     
     
     
     
-    const movieDetails = await this.movies.getMovieDetailsById(movieId);
+    const recipeDetails = await this.recipes.getRecipeDetailsById(recipeUri);
 
+    console.log("recipeDetails");
+    console.log(recipeDetails);
     
     
     
     
-    
-    this.moviesView.renderMovie(movieDetails, element);
-    let movieNumber = document.getElementById("detailsList").parentNode.getAttribute('data-id');
-console.log("inside renderMovie");
-console.log(movieNumber);
+    this.recipesView.renderRecipe(recipeDetails, element);
+    //console.log("getting id");
+    //console.log(document.getElementById("recipeList"));
+    //let recipe_uri = document.getElementById("recipeList").firstChild.getAttribute('data-id');
+    console.log("recipe_uri");
+    //console.log(recipe_uri);
+    //console.log("inside renderRecipe");
+    //console.log(recipeUri);
     //let elementStorage = element;
       document.querySelector(this.parent).innerHTML = ''; 
       document.querySelector(this.parent).appendChild(element);
@@ -111,14 +119,14 @@ console.log(movieNumber);
       document.getElementById("commentList").classList.remove("invisible");
       const commentList = this.comments.getCommentList();
 
-      this.commentsView.renderCommentsList(commentList, this.commentListParentElement, movieNumber); 
+      this.commentsView.renderCommentsList(commentList, this.commentListParentElement, recipeUri); 
 
       document.getElementById('add_comment').addEventListener('click', e => {    
         this.comments.saveComment();  
         const commentList = this.comments.getCommentList();
-        console.log("commentList inside MovieController inside renderMovie: ");
+        console.log("commentList inside MovieController inside renderRecipe: ");
       console.log(commentList);
-        this.commentsView.renderCommentsList(commentList, this.commentListParentElement, movieNumber); 
+        this.commentsView.renderCommentsList(commentList, this.commentListParentElement, recipeUri); 
       }, false);
    
   }

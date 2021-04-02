@@ -2,7 +2,7 @@
     display: none;
 }
 
-ul#movieList li{
+ul#recipeList li{
     list-style-type: none;
     border-bottom: 1px solid grey;
     margin: 5px;
@@ -18,7 +18,9 @@ ul#quakeList li:hover li{
     cursor: auto;
 }
 
-
+img{
+    max-width: 300px;
+}
 
 div#button{
     margin: 10px 10px;

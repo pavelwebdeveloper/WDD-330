@@ -1,14 +1,14 @@
 export default class Comment {
-    constructor(movieID, name, comment){
-        this.movieId = movieID;
-        this.name = name;
+    constructor(recipeUri, label, comment){
+        this.recipeURI = recipeUri;
+        this.recipeLabel = label;
         this.date = new Date();
         this.content = comment;
     }
 
    getCommentList(){
     let comments;
-    let storedComments = localStorage.getItem("movies")
+    let storedComments = localStorage.getItem("recipes")
     console.log(localStorage);
             if(storedComments == null){
                 comments = []
@@ -26,20 +26,23 @@ export default class Comment {
    saveComment(){
     let commentText = document.getElementById("comment_text").value;
    
-    let movieId = document.getElementById("movieList").firstChild.getAttribute('data-id');
-    let movieName = document.getElementById("movieList").firstChild.firstChild.firstChild.firstChild.nextSibling.textContent;
+    let recipeId = document.getElementById("recipeList").firstChild.getAttribute('data-id');
+    console.log("inside saveComment");
+    console.log(recipeId);
+    let recipeLabel = document.getElementById("recipeList").firstChild.firstChild.firstChild.firstChild.nextSibling.textContent;
+    //console.log(document.getElementById("recipeList"));
     
-    console.log(document.getElementById("movieList").firstChild.firstChild.firstChild.firstChild.nextSibling.textContent);
+    //console.log(document.getElementById("recipeList").firstChild.firstChild.firstChild.firstChild.nextSibling.textContent);
         if(commentText == ""){
             document.getElementById("message").innerHTML = "Sorry, input cannot be blank. Please, " +
             "specify a comment";
         } else {
             document.getElementById("message").innerHTML = "";
-            let type = "movies";
-            let movieID = movieId; 
-            let name = movieName;           
+            let type = "recipes";
+            let uri = recipeId; 
+            let label = recipeLabel;           
         let comment = commentText;
-        let newComment = new Comment(movieID, name, comment);
+        let newComment = new Comment(uri, label, comment);
         let comments = this.getCommentList();
         comments.push(newComment);
         let commentsArrayString = JSON.stringify(comments)
