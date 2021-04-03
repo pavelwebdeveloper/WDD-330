@@ -1,3 +1,9 @@
+@media only screen and (min-width: 350px) {
+    body {
+      background-color: lightgreen;
+    }
+  }
+
 .invisible{
     display: none;
 }
@@ -32,4 +38,14 @@ button {
 
 h1{
     text-align: center;
+}
+
+#canvas{
+    max-width: 300px;
+    max-height: 100px;
+}
+
+.error{
+    color: red;
+    font-size: 25px;
 }
