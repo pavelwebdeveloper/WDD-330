@@ -5,7 +5,7 @@ export function getData(url){
         if (!response.ok) {
             throw Error(response.statusText);
         } else {  
-            console.log("RESPONSE!!!!!!!!!!!!!!!!!!!"); 
+            //console.log("RESPONSE!!!!!!!!!!!!!!!!!!!"); 
             //console.log(response.json()); 
             return response.json();
             

@@ -2,8 +2,8 @@
 export default class RecipesView {
     renderRecipesList(recipesList, listElement) {
 
-      console.log("recipesList");
-      console.log(recipesList);
+      console.log("listElement");
+      console.log(listElement);
       
       listElement.innerHTML = recipesList
       .map(recipe => {
@@ -20,53 +20,91 @@ export default class RecipesView {
     renderRecipe(recipe, element) {
 
         console.log("inside renderRecipe");
-      console.log(recipe);
+        console.log("recipe[0].idMeal");
+      console.log(recipe[0].idMeal);
+      console.log("element");
+      console.log(element);
 
+element.innerHTML = "";     
 element.innerHTML = `<ul id="detailsList"><li><b>Title</b> ${recipe[0].strMeal}</li>
 <li><b>Image</b> <img src="${recipe[0].strMealThumb}"></img></li>
 <li><b>cuisineType</b> ${recipe[0].strArea}</li>
 <li><b>dishType</b> ${recipe[0].strCategory}</li>
-<li><b>instructions</b> ${recipe[0].strInstructions}</li>
-
-
+<li><b>instructions to cook</b> ${recipe[0].strInstructions}</li>
+<li><b>ingredients</b> <ul id="ingredientsFor${recipe[0].idMeal}"></ul></li>
 </ul>`;
 
-//<li><b>healthLabels</b> ${this.renderHealthLabels(recipe[0].recipe.healthLabels)}</li>
-// <li><b>ingredients</b> ${this.renderIngredients(recipe[0].recipe.ingredients)}</li>
 
 const inputElement = document.getElementById("inputComment");
+console.log("inputElement");
+      console.log(inputElement);
+
             inputElement.innerHTML = "";
-            var input = document.createElement("input");
-            input.setAttribute("id", "comment_text");
-            inputElement.appendChild(input);
+            var textarea = document.createElement("textarea");
+            textarea.setAttribute("id", "comment_text");
+            textarea.setAttribute("placeholder", "You are welcome to leave a comment about the dish in here");
+            textarea.setAttribute("rows", "10");
+            textarea.setAttribute("cols", "30");
+            inputElement.appendChild(textarea);
             var button = document.createElement("button");
             button.setAttribute("id", "add_comment");
             var node = document.createTextNode("Add comment");
             button.appendChild(node);
             inputElement.appendChild(button);
 
-    
+            this.renderIngredients(recipe[0], recipe[0].idMeal);        
             //return movieId;
   }
 
   
-  renderIngredients(ingredients){
-    return ingredients.map(ingredient => {
-        
-        return `<ul><li>
-  <h3>${ingredient.text}</h3><p><b>weight: </b>${ingredient.weight}</p> <img src="${ingredient.image}"></img>
-  </li></ul>`;
-        
-      })
-      .join('');
-  }
+  renderIngredients(ingredients, idMeal){
 
-  renderHealthLabels(healthLabels){
-    return healthLabels.map(healthLabel => {
-        
-        return `<ul><li>${healthLabel}</li></ul>`;        
-      })
-      .join('');
+    console.log("insde renderIngredients");
+      //console.log(ingredients.length);
+      console.log("ingredients");
+      console.log(ingredients);
+    
+    var ingredientList = ``;
+    var ingredientsArray = [];
+      var measuresArray = [];
+    for (let ingredient in ingredients) {      
+
+      console.log("ingredients[ingredient]");
+      console.log(ingredients);
+      console.log(ingredients);
+      //console.log(ingredients[ingredient].length);
+      
+      if(ingredient.includes("strIngredient") && ingredients[ingredient] != null && ingredients[ingredient] != ""){
+        ingredientsArray.push(ingredients[ingredient]);
+       }
+       if(ingredient.includes("strMeasure") && ingredients[ingredient] != null && ingredients[ingredient] != ""){
+        measuresArray.push(ingredients[ingredient]);
+       }
+    }
+
+    console.log("ingredientsArray");
+      console.log(ingredientsArray);
+      console.log(ingredientsArray.length);
+
+      console.log("measuresArray");
+      console.log(measuresArray);
+      console.log(measuresArray.length);
+
+    for(let i=0; i<ingredientsArray.length;i++){
+      for(let x=0; x<measuresArray.length;x++){
+        if(i == x){
+      ingredientList += `<li><b>${ingredientsArray[i]}</b> - ${measuresArray[x]}</li>`;
+        }
+      }
+    }   
+
+      console.log("inside renderIngredients");
+      console.log(idMeal);
+      console.log(document.getElementById(`ingredientsFor${idMeal}`));
+
+      //return ingredientList;
+      document.getElementById(`ingredientsFor${idMeal}`).innerHTML = ingredientList;
   }
+  
   
 }

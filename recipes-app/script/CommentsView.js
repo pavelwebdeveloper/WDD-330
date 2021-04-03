@@ -1,17 +1,17 @@
 export default class CommentsView {
-    renderCommentsList(commentList, listElement, recipeURI) {
+    renderCommentsList(commentList, listElement, recipeId) {
         //let movieId = document.getElementById("detailsList").parentNode.getAttribute('data-id');
         /*let movieId = document.getElementById("detailsList");*/
-        console.log("commentList !!!!!!!!!!!!!!!!!!!: ");
+        /*console.log("commentList !!!!!!!!!!!!!!!!!!!: ");
         console.log(commentList);
         console.log("recipeURI: ");
-        console.log(recipeURI);
+        console.log(recipeId);*/
       
       listElement.innerHTML = commentList
       .map(comment => {
-          console.log("inside map");
-        console.log(comment.recipeURI);
-        if(recipeURI == comment.recipeURI){
+          //console.log("inside map");
+        //console.log(comment.recipeID);
+        if(recipeId == comment.recipeID){
         return `<li class="comment">
   <h3>${comment.date}</h3>, <p>${comment.content}</p>
   </li>`;

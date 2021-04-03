@@ -22,16 +22,16 @@ export default class RecipesController {
     this.comments = new Comment();
     this.commentsView = new CommentsView();
   }
-  async init(nameForSearch = '') {
+  async init(searchValue = '', searchType = '') {
     
     this.parentElement = document.querySelector(this.parent);
     this.commentListParentElement = document.querySelector(this.commentListParent);
     
     
-    const recipeList = await this.recipes.getRecipes(nameForSearch);
+    const recipeList = await this.recipes.getRecipes(searchValue, searchType);
     //console.log(await this.movies.getMovies());
 
-    console.log(recipeList);
+    //console.log(recipeList);
     
     this.parentElement.innerHTML = 'Loading...'; 
 
@@ -47,8 +47,8 @@ export default class RecipesController {
     this.parentElement.addEventListener('click', e => {
         
       this.getRecipeDetails(e.target.parentElement.getAttribute('data-id'));
-      console.log("id inside RecipeController: ");
-      console.log(e.target.parentElement.getAttribute('data-id'));
+      //console.log("id inside RecipeController: ");
+      //console.log(e.target.parentElement.getAttribute('data-id'));
       
      
       
@@ -67,17 +67,42 @@ export default class RecipesController {
     document.getElementById("inputComment").innerHTML = '';
     
     let nameForSearch = document.getElementById("searchByName").value;
-    this.init(nameForSearch);
+    let letterForSearch = document.getElementById("searchByFirstLetter").value;
+    if(nameForSearch == ''){
+      this.init(letterForSearch);
+    } else if(letterForSearch == ''){
+      this.init(nameForSearch);
+    }
+    
   }, false); 
 
   //document.getElementById('searchByName').addEventListener('keyup', getNameForSearchFromUser, false);
   //location.reload();
+
+  document.getElementById('searchByFirstLetter').addEventListener('keyup', e => {
+      
+    let letterForSearch = document.getElementById("searchByFirstLetter").value;
+    let searchType = 'byLetter';
+    document.getElementById("searchByName").value = '';
+    console.log("document.getElementById(this.parent)");
+    console.log(document.querySelector(this.parent));
+    
+    this.makeElementsInvisibleWhenSearching();
+    
+    
+    this.init(letterForSearch, searchType);
+  }, false);
+
+
   document.getElementById('searchByName').addEventListener('keyup', e => {
       
     let nameForSearch = document.getElementById("searchByName").value;
-    
+    let searchType = 'byName';
+    document.getElementById("searchByFirstLetter").value = '';
+    this.makeElementsInvisibleWhenSearching();
 
-    this.init(nameForSearch);
+    
+    this.init(nameForSearch, searchType);
   }, false);
 
   
@@ -85,33 +110,27 @@ export default class RecipesController {
   
   }
 
-  async getRecipeDetails(recipeUri) {
+  async getRecipeDetails(idMeal) {
     // get the details for the quakeId provided from the model, then send them to the view 
     //to be displayed 
-    let element = document.querySelector(`[data-id="${recipeUri}"]`); 
+    //let element = document.querySelector(`[data-id="${idMeal}"]`); 
+    console.log("inside getRecipeDetails");
+    console.log("this.parentElement");
+    console.log(this.parentElement);
+    let element = this.parentElement; 
     
     
     
     
-    const recipeDetails = await this.recipes.getRecipeDetailsById(recipeUri);
+    const recipeDetails = await this.recipes.getRecipeDetailsById(idMeal);
 
-    console.log("recipeDetails");
-    console.log(recipeDetails);
+    
     
     
     
     
     this.recipesView.renderRecipe(recipeDetails, element);
-    //console.log("getting id");
-    //console.log(document.getElementById("recipeList"));
-    //let recipe_uri = document.getElementById("recipeList").firstChild.getAttribute('data-id');
-    console.log("recipe_uri");
-    //console.log(recipe_uri);
-    //console.log("inside renderRecipe");
-    //console.log(recipeUri);
-    //let elementStorage = element;
-      document.querySelector(this.parent).innerHTML = ''; 
-      document.querySelector(this.parent).appendChild(element);
+    
       
       document.getElementById("backToListButton").classList.remove("invisible");
       document.getElementById("message").classList.remove("invisible");
@@ -119,16 +138,27 @@ export default class RecipesController {
       document.getElementById("commentList").classList.remove("invisible");
       const commentList = this.comments.getCommentList();
 
-      this.commentsView.renderCommentsList(commentList, this.commentListParentElement, recipeUri); 
+      this.commentsView.renderCommentsList(commentList, this.commentListParentElement, idMeal); 
 
       document.getElementById('add_comment').addEventListener('click', e => {    
         this.comments.saveComment();  
         const commentList = this.comments.getCommentList();
-        console.log("commentList inside MovieController inside renderRecipe: ");
-      console.log(commentList);
-        this.commentsView.renderCommentsList(commentList, this.commentListParentElement, recipeUri); 
+        
+        this.commentsView.renderCommentsList(commentList, this.commentListParentElement, idMeal); 
       }, false);
    
+  }
+
+  makeElementsInvisibleWhenSearching(){
+    document.querySelector(this.parent).innerHTML = '';
+    let visibilityOfBackToListButton = document.getElementById("backToListButton").classList.value;
+    if(visibilityOfBackToListButton == ''){
+      document.getElementById("backToListButton").classList.add("invisible");
+      document.getElementById("message").classList.add("invisible");
+      document.getElementById("inputComment").classList.add("invisible");
+      document.getElementById("commentList").classList.add("invisible");
+    }
+
   }
   
   

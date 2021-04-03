@@ -12,26 +12,46 @@ export default class Recipe {
     //this.urlToGetMovieDetails = 'http://www.omdbapi.com/?i=tt3896198&apikey=6c3a52ae';
     
   }
-  async getRecipes(nameForSearch = '') {
+  async getRecipes(nameForSearch = '', searchType = '') {
 
     //console.log("LENGTH");
     //console.log(nameForSearch.length);
    
-     if(nameForSearch.length == 0){
+     if(nameForSearch.length == ''){
      // await getData(this.baseUrl + 'q=soup&app_id=2468925c&app_key=bd6464a1072a72672687d0373d5f92a9').then(data => {
         await getData('https://www.themealdb.com/api/json/v1/1/search.php?f=c').then(data => { 
       console.log(data.meals);
         this._recipes = data.meals;
       });
       
-    } else {
-        console.log("letter for search");
+    } else { 
+      if(searchType == 'byName'){
+        console.log("searchType");
+      console.log(searchType);
+        console.log("name for search");
         console.log(nameForSearch.length);
-      await getData('https://www.themealdb.com/api/json/v1/1/search.php?f=' + nameForSearch.trim()).then(data => {
-        console.log("Search");
-        console.log(data.meals);
+      //await getData('https://www.themealdb.com/api/json/v1/1/search.php?f=' + nameForSearch.trim()).then(data => {
+        await getData('https://www.themealdb.com/api/json/v1/1/search.php?s=' + nameForSearch.trim()).then(data => {
+            console.log("Search");
+            console.log(data.meals);
+        //console.log("Search");
+        //console.log(data.meals);
         this._recipes = data.meals;
       });
+    } else if(searchType == 'byLetter'){
+      console.log("searchType");
+      console.log(searchType);
+      console.log("letter for search");
+      console.log(nameForSearch);
+    await getData('https://www.themealdb.com/api/json/v1/1/search.php?f=' + nameForSearch.trim()).then(data => {
+      //await getData('https://www.themealdb.com/api/json/v1/1/search.php?s=' + nameForSearch.trim()).then(data => {
+          console.log("Search");
+          console.log(data.meals);
+      //console.log("Search");
+      //console.log(data.meals);
+      this._recipes = data.meals;
+    });
+  }
     }
 
     return this._recipes;
