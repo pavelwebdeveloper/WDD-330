@@ -10,5 +10,5 @@ context.fillRect(10,10,350,100);
 
 //  draw the text “Hello from Canvas” in green at coordinates (20,300)
 context.fillStyle = '#0c0'; // a blue fill color
-context.font = 'bold 46px sans-serif';
-context.fillText('Dish library', 30, 70);
+context.font = 'bold 36px sans-serif';
+context.fillText('Dish database', 30, 70);

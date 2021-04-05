@@ -19,7 +19,7 @@ export default class CommentsView {
       })
       .join('');
     
-   
+      
 
     
     /*renderMovie(movie, element) {

@@ -1,6 +1,10 @@
-@media only screen and (min-width: 350px) {
+@media only screen and (max-width: 350px) {
     body {
       background-color: lightgreen;
+    }
+    
+    .mealThumb{
+        display:none;
     }
   }
 
@@ -14,15 +18,7 @@ ul#recipeList li{
     margin: 5px;
     padding: 5px;
 }
-ul#quakeList li:hover{
-    cursor: pointer;
-    background-color: yellowgreen;
-}
 
-ul#quakeList li:hover li{
-    background-color: white;
-    cursor: auto;
-}
 
 img{
     max-width: 300px;
@@ -32,20 +28,59 @@ div#button{
     margin: 10px 10px;
 }
 
-button {
-    margin: 10px;
-}
-
 h1{
     text-align: center;
 }
 
 #canvas{
-    max-width: 300px;
-    max-height: 100px;
+    max-width: 600px;
+    max-height: 300px;
 }
 
 .error{
     color: red;
     font-size: 25px;
 }
+
+@keyframes text-animation {
+    from{
+    color: orange;
+    font-size: 36px;
+    transform: translateX(-50px);
+    }
+    to {
+    color: green;
+    font-size: 56px;
+    transform: translateX(100px);
+    }
+   }
+   
+h3 {
+    font-size: 36px;
+    color: orange;
+    animation: 2s infinite 50ms text-animation;
+    animation-play-state: paused;
+   }
+   h3:hover {
+    animation-play-state: running;
+   }
+
+   .highlight{
+       background-color:lightcyan;
+   }
+
+   #recipeList h3, img{
+       cursor: pointer;
+   }
+
+   #recipeList #detailsList img{
+       cursor: default;
+   }
+
+   button{
+       width: 100px;
+       height: 30px;
+       cursor: pointer;
+       margin: 10px;
+   }
+

@@ -9,10 +9,11 @@ export default class RecipesView {
       .map(recipe => {
         
         return `<li data-id="${recipe.idMeal}" class="recipe">
-  <h3>${recipe.strMeal}</h3>
+  <h3>${recipe.strMeal}</h3> <img class="mealThumb" src="${recipe.strMealThumb}"></img>
   </li>`;
       })
       .join('');
+      
     }
 
 
@@ -54,6 +55,13 @@ console.log("inputElement");
 
             this.renderIngredients(recipe[0], recipe[0].idMeal);        
             //return movieId;
+
+            document.getElementById("comment_text").addEventListener("mouseover", this.highlightRecipe, false);
+            document.getElementById("comment_text").addEventListener("mouseout", this.highlightRecipe, false);
+  }
+
+  highlightRecipe(event){
+    event.target.classList.toggle('highlight');
   }
 
   

@@ -38,6 +38,8 @@ export default class RecipesController {
     
     
     this.recipesView.renderRecipesList(recipeList, this.parentElement); 
+
+    
     
     const commentList = this.comments.getCommentList();
 
@@ -160,7 +162,7 @@ export default class RecipesController {
     }
 
   }
-  
+
   
    
 }   
