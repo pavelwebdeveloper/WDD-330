@@ -1,44 +1,78 @@
+import canvas from './canvas.js';
+
 // Recipe View handler
 export default class RecipesView {
-    renderRecipesList(recipesList, listElement) {
-
-      console.log("listElement");
-      console.log(listElement);
+    renderRecipesList(recipesList, listElement, favoriteList) {     
       
-      listElement.innerHTML = recipesList
-      .map(recipe => {
-        
-        return `<li data-id="${recipe.idMeal}" class="recipe">
-  <h3>${recipe.strMeal}</h3> <img class="mealThumb" src="${recipe.strMealThumb}"></img>
-  </li>`;
-      })
-      .join('');
       
+      if(favoriteList){
+        listElement.innerHTML = '';
+        for(let i=0;i<recipesList.length;i++){
+              listElement.innerHTML += recipesList[i]
+            .map(recipe => {
+              return `<li data-id="${recipe.idMeal}" class="favoriteRecipe">
+        <h3>${recipe.strMeal}</h3> <img class="mealThumb" src="${recipe.strMealThumb}"></img>
+        </li>`;
+            })
+            .join('');
+    }
+      } else {
+          listElement.innerHTML = recipesList
+          .map(recipe => {
+            return `<li data-id="${recipe.idMeal}" class="recipe">
+      <h3>${recipe.strMeal}</h3> <img class="mealThumb" src="${recipe.strMealThumb}"></img>
+      </li>`;
+          })
+          .join('');
+        }
     }
 
+    
+    /*async renderFavoriteRecipesList(favoriteRecipesData, parentElement){
+      
+      console.log("favoriteRecipesData !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.log(favoriteRecipesData);
+  
+      this.renderRecipesList(favoriteRecipesData, parentElement); 
+    }*/
 
     
-    renderRecipe(recipe, element) {
+    renderRecipe(recipe, element, favoriteRecipes) {        
+     
+      document.getElementById("dishCollection").innerHTML = `<canvas id='canvasLikeList'>Sorry, but your browser does not support the canvas element</canvas><br><canvas id="likeListMessage"></canvas>`;
 
-        console.log("inside renderRecipe");
-        console.log("recipe[0].idMeal");
-      console.log(recipe[0].idMeal);
-      console.log("element");
-      console.log(element);
 
-element.innerHTML = "";     
-element.innerHTML = `<ul id="detailsList"><li><b>Title</b> ${recipe[0].strMeal}</li>
-<li><b>Image</b> <img src="${recipe[0].strMealThumb}"></img></li>
-<li><b>cuisineType</b> ${recipe[0].strArea}</li>
-<li><b>dishType</b> ${recipe[0].strCategory}</li>
-<li><b>instructions to cook</b> ${recipe[0].strInstructions}</li>
-<li><b>ingredients</b> <ul id="ingredientsFor${recipe[0].idMeal}"></ul></li>
-</ul>`;
+      
 
+      element.innerHTML = "";  
+      var ignoreImage = false;
+      for(let i=0; i<favoriteRecipes.length;i++ ){  
+        if(favoriteRecipes[i].idForMeal == recipe[0].idMeal){
+          ignoreImage = true;
+          
+        }
+      }
+
+      if(!ignoreImage){
+        element.innerHTML = `<img src="${recipe[0].strMealThumb}" id="${recipe[0].idMeal}" class="draggableImage"></img>`;
+      }
+
+    element.innerHTML += `<ul id="detailsList"><li id="${recipe[0].idMeal}"><b>Title</b> ${recipe[0].strMeal}</li>
+                          <li><b>Image</b><img src="${recipe[0].strMealThumb}"></img></li>
+                          <li><b>cuisineType</b> ${recipe[0].strArea}</li>
+                          <li><b>dishType</b> ${recipe[0].strCategory}</li>
+                          <li><b>instructions to cook</b> ${recipe[0].strInstructions}</li>
+                          <li><b>ingredients</b> <ul id="ingredientsFor${recipe[0].idMeal}"></ul></li>
+                          </ul>`;
+
+    if(!ignoreImage){
+      canvas.drawDishCollectionBox();
+    } else {
+      document.getElementById("dishCollection").innerHTML = '';
+    }
 
 const inputElement = document.getElementById("inputComment");
-console.log("inputElement");
-      console.log(inputElement);
+
 
             inputElement.innerHTML = "";
             var textarea = document.createElement("textarea");
@@ -47,56 +81,42 @@ console.log("inputElement");
             textarea.setAttribute("rows", "10");
             textarea.setAttribute("cols", "30");
             inputElement.appendChild(textarea);
+            var commentMessageElement = document.createElement("p");
+            commentMessageElement.setAttribute("id", "commentMessageElement");
+            inputElement.appendChild(commentMessageElement);
+            var messageElement = document.createElement("p");
+            messageElement.setAttribute("id", "anotherMessage");
+            inputElement.appendChild(messageElement);
             var button = document.createElement("button");
             button.setAttribute("id", "add_comment");
             var node = document.createTextNode("Add comment");
             button.appendChild(node);
             inputElement.appendChild(button);
 
-            this.renderIngredients(recipe[0], recipe[0].idMeal);        
-            //return movieId;
-
-            document.getElementById("comment_text").addEventListener("mouseover", this.highlightRecipe, false);
-            document.getElementById("comment_text").addEventListener("mouseout", this.highlightRecipe, false);
+            this.renderIngredients(recipe[0], recipe[0].idMeal);       
+            document.getElementById("comment_text").addEventListener("mouseover", this.highlightCommentTextarea, false);
+            document.getElementById("comment_text").addEventListener("mouseout", this.highlightCommentTextarea, false);            
   }
 
-  highlightRecipe(event){
+  highlightCommentTextarea(event){
     event.target.classList.toggle('highlight');
   }
 
   
-  renderIngredients(ingredients, idMeal){
-
-    console.log("insde renderIngredients");
-      //console.log(ingredients.length);
-      console.log("ingredients");
-      console.log(ingredients);
+  renderIngredients(ingredients, idMeal){    
     
-    var ingredientList = ``;
-    var ingredientsArray = [];
+      var ingredientList = ``;
+      var ingredientsArray = [];
       var measuresArray = [];
-    for (let ingredient in ingredients) {      
 
-      console.log("ingredients[ingredient]");
-      console.log(ingredients);
-      console.log(ingredients);
-      //console.log(ingredients[ingredient].length);
-      
+    for (let ingredient in ingredients) {        
       if(ingredient.includes("strIngredient") && ingredients[ingredient] != null && ingredients[ingredient] != ""){
         ingredientsArray.push(ingredients[ingredient]);
        }
        if(ingredient.includes("strMeasure") && ingredients[ingredient] != null && ingredients[ingredient] != ""){
         measuresArray.push(ingredients[ingredient]);
        }
-    }
-
-    console.log("ingredientsArray");
-      console.log(ingredientsArray);
-      console.log(ingredientsArray.length);
-
-      console.log("measuresArray");
-      console.log(measuresArray);
-      console.log(measuresArray.length);
+    }    
 
     for(let i=0; i<ingredientsArray.length;i++){
       for(let x=0; x<measuresArray.length;x++){
@@ -104,15 +124,12 @@ console.log("inputElement");
       ingredientList += `<li><b>${ingredientsArray[i]}</b> - ${measuresArray[x]}</li>`;
         }
       }
-    }   
-
-      console.log("inside renderIngredients");
-      console.log(idMeal);
-      console.log(document.getElementById(`ingredientsFor${idMeal}`));
+    }      
 
       //return ingredientList;
       document.getElementById(`ingredientsFor${idMeal}`).innerHTML = ingredientList;
   }
+  
   
   
 }

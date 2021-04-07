@@ -9,15 +9,18 @@
 </head>
 <body>
     <header>
-        <canvas id='canvas'>Sorry, but your browser does not support the canvas element</canvas>
+        <div><canvas id='canvasLogo'>Sorry, but your browser does not support the canvas element</canvas><div id="dishCollection"></div></div>
+        
         </header>
-    <label for="searchByFirstLetter">Search various meals by first letter:</label>
+    <label for="searchByFirstLetter">Search recipes by first letter:</label>
                 <input type="text" id="searchByFirstLetter" name="searchByFirstLetter" size="1" pattern="[a-zA-Z]" maxlength="1">
                 <span class="error" aria-live="polite"></span><br><br>
-    <label for="searchByName">Search meal by name:</label>
+    <label for="searchByName">Search a recipe by word:</label>
                 <input type="text" id="searchByName" name="searchByName" pattern="[a-zA-Z]">
                 <span class="error" aria-live="polite"></span><br>
     <div id="button"><button id="backToListButton" class="invisible">Back to list</button></div>
+    <button id="favoriteRecipes" class="invisible">Show favorite recipes</button>
+    <button id="backToFavoriteRecipesList" class="invisible">Back to favorite recipes list</button>    
     <ul id='recipeList'>
         Ajax response with recipe list will appear here
     </ul>

@@ -1,4 +1,4 @@
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 450px) {
     body {
       background-color: lightgreen;
     }
@@ -6,10 +6,20 @@
     .mealThumb{
         display:none;
     }
+
+
+       img{
+        max-width: 150px;
+    }
+    
   }
 
 .invisible{
     display: none;
+}
+
+ul#recipeList, ul#detailsList {
+    padding-left: 0;
 }
 
 ul#recipeList li{
@@ -37,6 +47,11 @@ h1{
     max-height: 300px;
 }
 
+canvas#likeListMessage{
+    max-width: 600px;
+    max-height: 130px;
+}
+
 .error{
     color: red;
     font-size: 25px;
@@ -61,6 +76,11 @@ h3 {
     animation: 2s infinite 50ms text-animation;
     animation-play-state: paused;
    }
+
+   li {
+       list-style-type: none;
+   }
+
    h3:hover {
     animation-play-state: running;
    }
@@ -78,9 +98,17 @@ h3 {
    }
 
    button{
-       width: 100px;
-       height: 30px;
+       width: 150px;
+       height: 40px;
+       background-color: green;
+       color: white;
        cursor: pointer;
        margin: 10px;
    }
+
+   
+
+   img.draggableImage{
+    max-width:50px;    
+}
 

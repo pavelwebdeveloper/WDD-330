@@ -8,48 +8,72 @@ export default class Comment {
 
    getCommentList(){
     let comments;
-    let storedComments = localStorage.getItem("recipes")
-    //console.log(localStorage);
+    let storedComments = localStorage.getItem("recipesComments");
             if(storedComments == null){
                 comments = []
             } else {
-                comments = JSON.parse(storedComments)
-                /*console.log("memory start");
-                console.log(comments);
-                console.log(typeof comments);
-                console.log("memory end");*/
+                comments = JSON.parse(storedComments);                
             }
-
             return comments;
    }
 
    saveComment(){
     let commentText = document.getElementById("comment_text").value;
-   
-    let id = document.getElementById("recipeList").firstChild.getAttribute('data-id');
-    /*console.log("inside saveComment");
-    console.log(id);*/
-    let recipeLabel = document.getElementById("recipeList").firstChild.firstChild.firstChild.firstChild.nextSibling.textContent;
-    //console.log(document.getElementById("recipeList"));
+    var commentMessageElement = document.getElementById("commentMessageElement");
+    var anotherMessageElement = document.getElementById("anotherMessage");
     
-    //console.log(document.getElementById("recipeList").firstChild.firstChild.firstChild.firstChild.nextSibling.textContent);
-        if(commentText == ""){
-            document.getElementById("message").innerHTML = "Sorry, input cannot be blank. Please, " +
-            "specify a comment";
-        } else {
-            document.getElementById("message").innerHTML = "";
-            let type = "recipes";
-            let idMeal = id; 
-            let label = recipeLabel;           
-        let comment = commentText;
-        let newComment = new Comment(idMeal, label, comment);
-        let comments = this.getCommentList();
-        comments.push(newComment);
-        let commentsArrayString = JSON.stringify(comments)
-        //console.log(commentsArrayString);
-        localStorage.setItem(type, commentsArrayString);                
-           
+    
+    
+
+    commentMessageElement.innerHTML = "";
+
+    
+    try {
         
-}
-}
+        if(commentText.length == 0)  {          
+            throw 'not specified';
+        } else if(commentText.length < 4) {
+             throw "too short";
+    } else {
+            
+    let childElement = document.getElementById("recipeList").firstChild;
+
+    
+
+    if(childElement.nodeName != "IMG"){
+             var id = document.getElementById("recipeList").firstChild.firstChild.getAttribute('id');   
+             var recipeLabel = document.getElementById("recipeList").firstChild.firstChild.firstChild.nextSibling.textContent;
+         } else {   
+             var id = document.getElementById("recipeList").firstChild.nextSibling.firstChild.getAttribute('id');   
+             var recipeLabel = document.getElementById("recipeList").firstChild.nextSibling.firstChild.firstChild.nextSibling.textContent;
+         }
+     
+         if(commentText == ""){
+             document.getElementById("message").innerHTML = "Sorry, input cannot be blank. Please, " +
+             "specify a comment";
+         } else {
+             document.getElementById("message").innerHTML = "";
+             let type = "recipesComments";
+             let idMeal = id; 
+             let label = recipeLabel.trim();           
+         let comment = commentText;
+         let newComment = new Comment(idMeal, label, comment);
+         let comments = this.getCommentList();
+         comments.push(newComment);
+         let commentsArrayString = JSON.stringify(comments);
+         localStorage.setItem(type, commentsArrayString);                
+            
+         
+         }
+    }
+    } catch (err){
+        commentMessageElement.innerHTML += `the comment is ${err}`;
+    } finally {
+        anotherMessageElement.innerHTML = "Thanks a lot for using our website !";
+    }
+
+
+
+
+    }
 }

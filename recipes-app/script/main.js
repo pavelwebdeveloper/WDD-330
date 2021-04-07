@@ -1,6 +1,4 @@
-import RecipesController from './RecipesController.js'
-//import getData from './utilities.js'
-
+import RecipesController from './RecipesController.js';
 
 
 const recipesController = new RecipesController('#recipeList', '#commentList');  
