@@ -1,4 +1,4 @@
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
     body {
       background-color: lightgreen;
     }
@@ -13,6 +13,14 @@
     }
     
   }
+
+.recipe, .favoriteRecipe{
+    display:flex;
+}
+
+.recipeHeading{
+    margin-left: 1em;
+}
 
 .invisible{
     display: none;

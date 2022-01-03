@@ -44,6 +44,8 @@ function showLikeListMessage(likeListMessageElement, recipeName){
     contextListMessage.fillText(`${recipeName} added !!!`, 5, 20);
 }
 
+
+
 export default {
     showLogo,
     drawDishCollectionBox,

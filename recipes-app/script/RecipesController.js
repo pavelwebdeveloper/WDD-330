@@ -23,8 +23,13 @@ export default class RecipesController {
     //this.favoriteRecipesInfo;
     this.comments = new Comment();
     this.commentsView = new CommentsView();
+
+
+    this.searchType = '';
+    //this.controller = this;
   }
   async init(searchValue = '', searchType = '') {
+
 
     canvas.showLogo();
     
@@ -32,7 +37,9 @@ export default class RecipesController {
     this.commentListParentElement = document.querySelector(this.commentListParent);
     
     
+    
     const recipeList = await this.recipes.getRecipes(searchValue, searchType);
+    
     var favoriteRecipes = this.recipes.getFavoriteRecipesList();
     var favoriteRecipesData = await this.recipes.getFavoriteRecipesData(favoriteRecipes);    
     
@@ -139,7 +146,7 @@ export default class RecipesController {
   //document.getElementById('searchByName').addEventListener('keyup', getNameForSearchFromUser, false);
   //location.reload();
 
-  document.getElementById('searchByFirstLetter').addEventListener('keyup', e => {
+  document.getElementById('searchByFirstLetter').addEventListener('keyup', async e => {
     document.getElementById("dishCollection").innerHTML = "";
     document.getElementById("backToFavoriteRecipesList").classList.add("invisible");      
     let letterForSearch = document.getElementById("searchByFirstLetter").value;
@@ -148,21 +155,36 @@ export default class RecipesController {
     console.log("document.getElementById(this.parent)");
     console.log(document.querySelector(this.parent));    
     this.makeElementsInvisibleWhenSearching();    
-    this.init(letterForSearch, searchType);
+    //this.init(letterForSearch, searchType);
+    const recipeList = await this.recipes.getRecipes(letterForSearch, searchType);
+    if(recipeList == null){
+      this.parentElement.innerHTML = '<b style="color:red;">Sorry, no results for this letter</b>'; 
+       
+    } else {
+    this.recipesView.renderRecipesList(recipeList, this.parentElement); 
+    }
   }, false);
 
 
-  document.getElementById('searchByName').addEventListener('keyup', e => {
+  document.getElementById('searchByName').addEventListener('keyup', async e => {
     document.getElementById("dishCollection").innerHTML = "";
     document.getElementById("backToFavoriteRecipesList").classList.add("invisible");      
     let nameForSearch = document.getElementById("searchByName").value;
     let searchType = 'byName';
     document.getElementById("searchByFirstLetter").value = '';
     this.makeElementsInvisibleWhenSearching();    
-    this.init(nameForSearch, searchType);
-  }, false);  
+    //this.init(nameForSearch, searchType);
+    const recipeList = await this.recipes.getRecipes(nameForSearch, searchType);
+    if(recipeList == null){
+      this.parentElement.innerHTML = '<b style="color:red;">Sorry, no results for this word</b>';
+    } else {
+    this.recipesView.renderRecipesList(recipeList, this.parentElement); 
+    }
+  }, false); 
   
   }
+
+
 
   async getRecipeDetails(idMeal, listElement) {   
     

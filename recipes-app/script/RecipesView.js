@@ -11,7 +11,7 @@ export default class RecipesView {
               listElement.innerHTML += recipesList[i]
             .map(recipe => {
               return `<li data-id="${recipe.idMeal}" class="favoriteRecipe">
-        <h3>${recipe.strMeal}</h3> <img class="mealThumb" src="${recipe.strMealThumb}"></img>
+         <img class="mealThumb" src="${recipe.strMealThumb}"></img><h3 class="recipeHeading">${recipe.strMeal}</h3>
         </li>`;
             })
             .join('');
@@ -20,7 +20,7 @@ export default class RecipesView {
           listElement.innerHTML = recipesList
           .map(recipe => {
             return `<li data-id="${recipe.idMeal}" class="recipe">
-      <h3>${recipe.strMeal}</h3> <img class="mealThumb" src="${recipe.strMealThumb}"></img>
+       <img class="mealThumb" src="${recipe.strMealThumb}"></img><h3 class="recipeHeading">${recipe.strMeal}</h3>
       </li>`;
           })
           .join('');

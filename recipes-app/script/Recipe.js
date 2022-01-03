@@ -10,11 +10,12 @@ export default class Recipe {
   }
 
 
-  async getRecipes(valueForSearch = '', searchType = '') {  
-    
+  async getRecipes(valueForSearch = '', searchType = '') {   
     
    
-     if(valueForSearch.length == ''){
+     if(valueForSearch.length == ''){ 
+       
+            
             await getData('https://www.themealdb.com/api/json/v1/1/search.php?f=c').then(data => { 
             this._recipes = data.meals;
           });
@@ -23,15 +24,22 @@ export default class Recipe {
           if(searchType == 'byName'){        
             await getData('https://www.themealdb.com/api/json/v1/1/search.php?s=' + valueForSearch.trim()).then(data => {           
             this._recipes = data.meals;
+
+            console.log("The result of search by name");
+            console.log(this._recipes);
+            
           });
         } else if(searchType == 'byLetter'){ 
           console.log("I AM HEREEEEEEEEEEEEEEEEEEEEEEEE");   
           console.log(searchType);  
         await getData('https://www.themealdb.com/api/json/v1/1/search.php?f=' + valueForSearch.trim()).then(data => {     
           this._recipes = data.meals;
+          console.log("The result of search by letter");
+            console.log(this._recipes);
         });
       }
     }
+ 
     return this._recipes;
   }
 
