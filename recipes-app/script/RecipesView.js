@@ -10,18 +10,18 @@ export default class RecipesView {
         for(let i=0;i<recipesList.length;i++){
               listElement.innerHTML += recipesList[i]
             .map(recipe => {
-              return `<li data-id="${recipe.idMeal}" class="favoriteRecipe">
+              return `<a href="#viewRecipeDetailsTop"><li data-id="${recipe.idMeal}" class="favoriteRecipe">
          <img class="mealThumb" src="${recipe.strMealThumb}"></img><h3 class="recipeHeading">${recipe.strMeal}</h3>
-        </li>`;
+        </li></a>`;
             })
             .join('');
     }
       } else {
           listElement.innerHTML = recipesList
           .map(recipe => {
-            return `<li data-id="${recipe.idMeal}" class="recipe">
+            return `<a href="#viewRecipeDetailsTop"><li data-id="${recipe.idMeal}" class="recipe">
        <img class="mealThumb" src="${recipe.strMealThumb}"></img><h3 class="recipeHeading">${recipe.strMeal}</h3>
-      </li>`;
+      </li></a>`;
           })
           .join('');
         }
@@ -39,7 +39,7 @@ export default class RecipesView {
     
     renderRecipe(recipe, element, favoriteRecipes) {        
      
-      document.getElementById("dishCollection").innerHTML = `<canvas id='canvasLikeList'>Sorry, but your browser does not support the canvas element</canvas><br><canvas id="likeListMessage"></canvas>`;
+      document.getElementById("dishCollection").innerHTML = `<canvas id='canvasLikeList'>Sorry, but your browser does not support the canvas element</canvas><br><canvas id="likeListMessage">Sorry, but your browser does not support the canvas element</canvas>`;
 
 
       

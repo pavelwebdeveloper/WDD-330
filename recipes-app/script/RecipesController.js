@@ -84,7 +84,12 @@ export default class RecipesController {
     
 
       // click event for mouse clicks
-      this.parentElement.addEventListener('click', e => {        
+      this.parentElement.addEventListener('click', e => {  
+        console.log("What is the parent element ?");  
+        console.log(e.target.parentElement); 
+        console.log("What is the data-id for parent element ?");  
+        console.log(e.target.parentElement.getAttribute('data-id')); 
+        
         this.getRecipeDetails(e.target.parentElement.getAttribute('data-id'), e.target.parentElement);
         document.getElementById("favoriteRecipes").classList.add("invisible");     
     });
@@ -94,6 +99,17 @@ export default class RecipesController {
         this.getRecipeDetails(e.target.parentElement.getAttribute('data-id'), e.target.parentElement);
         document.getElementById("favoriteRecipes").classList.add("invisible");   
     });
+
+    this.parentElement.addEventListener('click', e => {     
+      this.getRecipeDetails(e.target.getAttribute('data-id'), e.target);
+      document.getElementById("favoriteRecipes").classList.add("invisible");     
+  });
+
+    // touchend event for portable devices
+    this.parentElement.addEventListener('touchend', e => {        
+      this.getRecipeDetails(e.target.getAttribute('data-id'), e.target);
+      document.getElementById("favoriteRecipes").classList.add("invisible");   
+  });
 
   
 
@@ -283,10 +299,7 @@ export default class RecipesController {
           })
       }
 
-  }
-
-  
-   
+  }  
 }   
 
 

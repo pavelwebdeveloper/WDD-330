@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <div><canvas id='canvasLogo'>Sorry, but your browser does not support the canvas element</canvas><div id="dishCollection"></div></div>
+        <div><a href="#"><canvas id='canvasLogo'>Sorry, but your browser does not support the canvas element</canvas></a><div id="dishCollection"></div></div>
         
         </header>
     <label for="searchByFirstLetter">Search recipes by first letter:</label>
@@ -18,7 +18,7 @@
                 <span class="error" aria-live="polite"></span><br><br>
     <label for="searchByName">Search a recipe by word:</label>
                 <input type="text" id="searchByName" name="searchByName" pattern="[a-zA-Z]">
-                <span class="error" aria-live="polite"></span><br>
+                <span id="viewRecipeDetailsTop" class="error" aria-live="polite"></span><br>
     <div id="button"><button id="backToListButton" class="invisible">Back to list</button></div>
     <button id="favoriteRecipes" class="invisible">Show favorite recipes</button>
     <button id="backToFavoriteRecipesList" class="invisible">Back to favorite recipes list</button>  

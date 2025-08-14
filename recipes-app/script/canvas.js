@@ -38,10 +38,22 @@ function drawDishCollectionBox(){
   // Added recipe message
 function showLikeListMessage(likeListMessageElement, recipeName){
     const contextListMessage = likeListMessageElement.getContext('2d');
-    contextListMessage.strokeStyle = "#FF8C00"; // a gray stroke color
-    contextListMessage.lineWidth = 20;   
+    //contextListMessage.strokeStyle = "#FF8C00"; // a gray stroke color
+    /*contextListMessage.lineWidth = 20;   
     contextListMessage.font = 'bold 20px sans-serif';
-    contextListMessage.fillText(`${recipeName} added !!!`, 5, 20);
+    contextListMessage.fillText(`${recipeName} added !!!`, 5, 20);*/
+
+    contextListMessage.fillStyle = "#0000cc"; // a blue fill color
+    contextListMessage.strokeStyle = "#0c0"; // a gray stroke color
+    contextListMessage.lineWidth = 5;
+        //  drawing a filled-in rectangle
+        //contextListMessage.fillRect(10,10,250,100);
+
+
+        //  draw the text “Hello from Canvas” in green at coordinates (20,300)
+        contextListMessage.fillStyle = '#0c0'; // a blue fill color
+        contextListMessage.font = 'bold 30px sans-serif';
+        contextListMessage.fillText(`${recipeName} added !!!`, 5, 50);
 }
 
 
